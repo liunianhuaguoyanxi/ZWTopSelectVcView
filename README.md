@@ -13,8 +13,9 @@
     #####开始ZWTopSelectVcViewUI绘制
     [self.topSelectVcView setupZWTopSelectVcViewUI];
 ##实现代理方法（必须实现，一步完成创建）
-   -(NSMutableArray *)totalControllerinZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+   -(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
    {
+   
     NSMutableArray *controllerMutableArr=[NSMutableArray array];
     
     [controllerMutableArr addObject:[[OneTableViewController alloc]init]];
