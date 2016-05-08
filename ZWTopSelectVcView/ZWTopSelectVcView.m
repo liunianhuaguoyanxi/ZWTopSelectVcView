@@ -28,6 +28,18 @@
 @property (nonatomic, strong) NSMutableArray   *titleIndexArr;
 @property (nonatomic, strong) NSMutableArray   *titleArr;
 @end
+typedef enum{
+    ZWTopSelectButtonTypeHeadFirst,
+    ZWTopSelectButtonTypeHeadSecond,
+    ZWTopSelectButtonTypeHeadThird,
+    ZWTopSelectButtonTypeHeadFourth,
+    ZWTopSelectButtonTypeHeadFifth,
+    ZWTopSelectButtonTypeHeadSixth,
+    ZWTopSelectButtonTypeHeadSeventh,
+    ZWTopSelectButtonTypeHeadEighth,
+    ZWTopSelectButtonTypeHeadNinth
+} ZWTopSelectButtonType;
+
 @implementation ZWTopSelectVcView
 /**
  *  开始ZWTopSelectVcViewUI绘制,必须实现！
@@ -61,7 +73,7 @@
  */
 -(void)setupChildViewController
 {
-    NSMutableArray *arr=  [self.delegate totalControllerinZWTopSelectVcView:self];
+    NSMutableArray *arr=  [self.delegate totalControllerInZWTopSelectVcView:self];
     
     for (UIViewController *vc in arr) {
         [self.contentVC addChildViewController:vc];
@@ -356,7 +368,6 @@
     [self.topViewEighthbtn setState:NO];
     [self.topViewNinthbtn setState:NO];
 }
-//TODO: 动画
 -(void)setupActionState:(BOOL)state{
     if (state==YES) {
         
@@ -364,51 +375,86 @@
         [self.contentView.layer removeAllAnimations];
     }else if(state==NO)
     {
-        //        CATransition *animation=[CATransition animation];
-        //        Fade = 1,                   //淡入淡出
-        //        Push,                       //推挤
-        //        Reveal,                     //揭开
-        //        MoveIn,                     //覆盖
-        //        Cube,                       //立方体
-        //        SuckEffect,                 //吮吸
-        //        OglFlip,                    //翻转
-        //        RippleEffect,               //波纹
-        //        PageCurl,                   //翻页
-        //        PageUnCurl,                 //反翻页
-        //        CameraIrisHollowOpen,       //开镜头
-        //        CameraIrisHollowClose,      //关镜头
-        //        CurlDown,                   //下翻页
-        //        CurlUp,                     //上翻页
-        //        FlipFromLeft,               //左翻转
-        //        FlipFromRight,              //右翻转
-        
-        
-        //  [self transitionWithType:@"cube"  ForView:self.contentView];
-        //  [self transitionWithType:@"suckEffect"  ForView:self.contentView];
-        
-        //  [self transitionWithType:@"oglFlip"  ForView:self.contentView];
-        
-        //  [self transitionWithType:@"rippleEffect"  ForView:self.contentView];
-        
-        //  [self transitionWithType:@"pageCurl"  ForView:self.contentView];
-        
-        
-        //   [self transitionWithType:@"cameraIrisHollowOpen"  ForView:self.contentView];
-        
-        //   [self transitionWithType:@"cameraIrisHollowClose"  ForView:self.contentView];
-        
-        //     [self transitionWithType:kCATransitionFade  ForView:self.contentView];
-        
-        
+
         
         [self transitionWithType:kCATransitionPush  ForView:self.contentView];
+        AnimationType animationType = self.animationType ? self.animationType : Push;
         
-        
-        //   [self transitionWithType:kCATransitionReveal  ForView:self.contentView];
-        
-        
-        //    [self transitionWithType:kCATransitionMoveIn  ForView:self.contentView];
+        switch (animationType) {
+            case Fade:
+                [self transitionWithType:kCATransitionFade  ForView:self.contentView];
+                break;
+                
+            case Push:
+                [self transitionWithType:kCATransitionPush  ForView:self.contentView];
+                break;
+                
+            case Reveal:
+                [self transitionWithType:kCATransitionReveal  ForView:self.contentView];
+                break;
+                
+            case MoveIn:
+                [self transitionWithType:kCATransitionMoveIn  ForView:self.contentView];
+                break;
+                
+            case Cube:
+                [self transitionWithType:@"cube"  ForView:self.contentView];
+                break;
+                
+            case SuckEffect:
+                [self transitionWithType:@"suckEffect"  ForView:self.contentView];
+                break;
+                
+            case OglFlip:
+                [self transitionWithType:@"oglFlip"  ForView:self.contentView];
+                break;
+                
+            case RippleEffect:
+                [self transitionWithType:@"rippleEffect"  ForView:self.contentView];
+                break;
+                
+            case PageCurl:
+                [self transitionWithType:@"pageCurl"  ForView:self.contentView];
+                break;
+                
+            case PageUnCurl:
+                [self transitionWithType:@"pageUnCurl"  ForView:self.contentView];
+                break;
+                
+            case CameraIrisHollowOpen:
+                [self transitionWithType:@"cameraIrisHollowOpen"  ForView:self.contentView];
+                break;
+                
+            case CameraIrisHollowClose:
+                [self transitionWithType:@"cameraIrisHollowClose"  ForView:self.contentView];
+                break;
+            case CurlDown:
+                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionCurlDown];
+                break;
+                
+            case CurlUp:
+                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionCurlUp];
+                break;
+                
+            case FlipFromLeft:
+                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionFlipFromLeft];
+                break;
+                
+            case FlipFromRight:
+                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionFlipFromRight];
+
+            default:
+                break;
+        }
+
     }
+}
+- (void) animationWithView : (UIView *)view WithAnimationTransition : (UIViewAnimationTransition) transition
+{
+    [UIView animateWithDuration:self.speedTime?self.speedTime:0.6 animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        [UIView setAnimationTransition:transition forView:view cache:YES];
+    }];
 }
 - (void) transitionWithType:(NSString *) type  ForView : (UIView *) view
 {
@@ -416,7 +462,7 @@
     CATransition *animation = [CATransition animation];
     
     //设置运动时间
-    animation.duration = self.speedCount;
+    animation.duration = self.speedTime?self.speedTime:0.6;
     
     //设置运动type
     animation.type = type;

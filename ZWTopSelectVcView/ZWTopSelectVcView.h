@@ -4,7 +4,7 @@
 //
 //  Created by 流年划过颜夕 on 16/5/6.
 //  Copyright © 2016年 流年划过颜夕. All rights reserved.
-//
+
 
 #import <UIKit/UIKit.h>
 @class ZWTopSelectVcView;
@@ -20,7 +20,8 @@
  *
  *  @return 返回封装您的控制器的可变数组
  */
--(NSMutableArray *)totalControllerinZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+-(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
 @optional
 /**
  *   统一通过totalTopBtns修改顶部控件样式
@@ -33,12 +34,16 @@
  
  */
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
 @end
+
+
 @interface ZWTopSelectVcView : UIView
 /**
  *  开始ZWTopSelectVcViewUI绘制,必须实现！
  */
 -(void)setupZWTopSelectVcViewUI;
+
 @property (nonatomic, weak) id<ZWTopSelectVcViewDelegate> delegate;
 
 /*************   顶部button具有的公有属性   *****************
@@ -49,17 +54,7 @@
  UIColor *notSelectedColor   button未选中颜色
  * **********   顶部button具有的公有属性   ****************
  */
-typedef enum{
-    ZWTopSelectButtonTypeHeadFirst,
-    ZWTopSelectButtonTypeHeadSecond,
-    ZWTopSelectButtonTypeHeadThird,
-    ZWTopSelectButtonTypeHeadFourth,
-    ZWTopSelectButtonTypeHeadFifth,
-    ZWTopSelectButtonTypeHeadSixth,
-    ZWTopSelectButtonTypeHeadSeventh,
-    ZWTopSelectButtonTypeHeadEighth,
-    ZWTopSelectButtonTypeHeadNinth
-} ZWTopSelectButtonType;
+
 @property (nonatomic ,strong) ZWTopSelectButton *topViewFirstbtn;
 @property (nonatomic ,strong) ZWTopSelectButton *topViewSecondbtn;
 @property (nonatomic ,strong) ZWTopSelectButton *topViewThirdbtn;
@@ -69,6 +64,27 @@ typedef enum{
 @property (nonatomic ,strong) ZWTopSelectButton *topViewSeventhbtn;
 @property (nonatomic ,strong) ZWTopSelectButton *topViewEighthbtn;
 @property (nonatomic ,strong) ZWTopSelectButton *topViewNinthbtn;
+
+typedef enum : NSUInteger {
+    Fade = 1,                   //淡入淡出
+    Push,                       //推挤
+    Reveal,                     //揭开
+    MoveIn,                     //覆盖
+    Cube,                       //立方体
+    SuckEffect,                 //吮吸
+    OglFlip,                    //翻转
+    RippleEffect,               //波纹
+    PageCurl,                   //翻页
+    PageUnCurl,                 //反翻页
+    CameraIrisHollowOpen,       //开镜头
+    CameraIrisHollowClose,      //关镜头
+    CurlDown,                   //下翻页
+    CurlUp,                     //上翻页
+    FlipFromLeft,               //左翻转
+    FlipFromRight,              //右翻转
+    
+} AnimationType;
+
 ///是否关闭动画
 @property (nonatomic, assign) BOOL   closeAnimation;
 ///底部滑块
@@ -77,8 +93,10 @@ typedef enum{
 @property (nonatomic ,weak  ) UIView *contentView;
 ///顶部容器
 @property (nonatomic, weak  ) UIView *viewTop;
-///设置动画速度
-@property (nonatomic, assign) float  speedCount;
+///设置动画时间
+@property (nonatomic, assign) float  speedTime;
+
+@property (nonatomic) AnimationType  animationType;
 
 @end
 

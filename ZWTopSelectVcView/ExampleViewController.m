@@ -5,13 +5,16 @@
 //  Created by 流年划过颜夕 on 16/5/6.
 //  Copyright © 2016年 流年划过颜夕. All rights reserved.
 //
+#import "ZWTopSelectButton.h"
 #import "ZWTopSelectVcView.h"
+
+
 #import "ExampleViewController.h"
 #import "OneTableViewController.h"
 #import "TwoTableViewController.h"
 #import "ThreeTableViewController.h"
 #import "FourViewController.h"
-#import "ZWTopSelectButton.h"
+
 @interface ExampleViewController ()<ZWTopSelectVcViewDelegate>
 @property (nonatomic, weak) ZWTopSelectVcView *topSelectVcView;
 @end
@@ -36,10 +39,27 @@
     //第三步： 开始ZWTopSelectVcViewUI绘制,必须实现！
     [self.topSelectVcView setupZWTopSelectVcViewUI];
     
-    
+//    Fade = 1,                   //淡入淡出
+//    Push,                       //推挤
+//    Reveal,                     //揭开
+//    MoveIn,                     //覆盖
+//    Cube,                       //立方体
+//    SuckEffect,                 //吮吸
+//    OglFlip,                    //翻转
+//    RippleEffect,               //波纹
+//    PageCurl,                   //翻页
+//    PageUnCurl,                 //反翻页
+//    CameraIrisHollowOpen,       //开镜头
+//    CameraIrisHollowClose,      //关镜头
+//    CurlDown,                   //下翻页
+//    CurlUp,                     //上翻页
+//    FlipFromLeft,               //左翻转
+//    FlipFromRight,              //右翻转
     
     //控制器切换动画速度
-    self.topSelectVcView.speedCount=1;
+    //self.topSelectVcView.speedTime=1;
+    //设置动画效果，默认为push
+    // self.topSelectVcView.animationType=2;
     //关闭动画效果
     // self.topSelectVcView.closeAnimation=YES;
     //隐藏底部滑块
@@ -48,7 +68,7 @@
 #pragma mark - ZWTopSelectVcViewDelegate
 #warning 只要一步且必须实现：传入您的各种控制器，用可变数组封装传入，就会动态的生成，默认最多能传入九个控制器
 //初始化设置
--(NSMutableArray *)totalControllerinZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+-(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 {
     //第一步
     NSMutableArray *controllerMutableArr=[NSMutableArray array];
