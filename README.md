@@ -26,6 +26,11 @@
     
     return controllerMutableArr;
    }
-####其他简单设置详情在demo中
+   
+####部分动画界面展示  
+  ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/push.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/水波.gif)
+    ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/淡入淡出.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/翻转.gif)
+      ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/覆盖.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/翻页.gif)
+####具体设置详情在demo中
 ####如果你有任何疑问，欢迎随时发邮件到menglanfenghen@163.com
 ####觉得还可以的话，记得给星呀，相互学习，嘿嘿嘿~
