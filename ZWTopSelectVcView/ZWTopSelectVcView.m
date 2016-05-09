@@ -16,8 +16,9 @@
 #import "TwoTableViewController.h"
 #import "ThreeTableViewController.h"
 #import "ZWTopSelectVcView.h"
+static const CGFloat topViewHeight=50;
 @interface ZWTopSelectVcView();
-
+@property (nonatomic, assign) CGFloat      topViewHeight;
 @property (nonatomic ,weak  ) UIViewController *showVC;
 @property (nonatomic ,strong) UIViewController *contentVC;
 @property (nonatomic, assign) int              index;
@@ -53,6 +54,13 @@ typedef enum{
     
     [self setupChildViewController];
     
+}
+-(CGFloat)setupTopViewHeight
+{
+    if ([self.delegate respondsToSelector:@selector(topViewHeightInZWTopSelectVcView:)]) {
+        return  [self.delegate topViewHeightInZWTopSelectVcView:self];
+    }else{
+        return topViewHeight;}
 }
 -(NSMutableArray *)titleIndexArr
 {
@@ -123,8 +131,9 @@ typedef enum{
 }
 -(void)setupViewTopContent
 {
-    //    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, NavigationBar_HEIGHT+20, self.frame.size.width, 50)];
-    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+    //    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, NavigationBar_HEIGHT+20, self.frame.size.width, topViewHeight)];
+    self.topViewHeight=[self setupTopViewHeight];
+    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.topViewHeight)];
     viewTop.backgroundColor=[UIColor whiteColor];
     [self addSubview:viewTop];
     self.viewTop=viewTop;
@@ -140,7 +149,7 @@ typedef enum{
             switch (i) {
                 case 0:
                 {
-                    ZWTopSelectButton *topViewFirstbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(0,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewFirstbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(0,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewFirstbtn.tag=ZWTopSelectButtonTypeHeadFirst;
                     self.topViewFirstbtn=topViewFirstbtn;
                     [self setupBtnContentState:self.topViewFirstbtn index:i];
@@ -151,7 +160,7 @@ typedef enum{
                     break;
                 case 1:
                 {
-                    ZWTopSelectButton *topViewSecondbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewSecondbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewSecondbtn.tag=ZWTopSelectButtonTypeHeadSecond;
                     self.topViewSecondbtn=topViewSecondbtn;
                     [self setupBtnContentState:self.topViewSecondbtn  index:i];
@@ -159,15 +168,16 @@ typedef enum{
                     break;
                 case 2:
                 {
-                    ZWTopSelectButton *topViewThirdbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewThirdbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewThirdbtn.tag=ZWTopSelectButtonTypeHeadThird;
                     self.topViewThirdbtn=topViewThirdbtn;
                     [self setupBtnContentState:self.topViewThirdbtn index:i];
+
                 }
                     break;
                 case 3:
                 {
-                    ZWTopSelectButton *topViewFourthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewFourthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewFourthbtn.tag=ZWTopSelectButtonTypeHeadFourth;
                     self.topViewFourthbtn=topViewFourthbtn;
                     [self setupBtnContentState:self.topViewFourthbtn index:i];
@@ -175,7 +185,7 @@ typedef enum{
                     break;
                 case 4:
                 {
-                    ZWTopSelectButton *topViewFifthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewFifthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewFifthbtn.tag=ZWTopSelectButtonTypeHeadFifth;
                     self.topViewFifthbtn=topViewFifthbtn;
                     [self setupBtnContentState:self.topViewFifthbtn index:i];
@@ -183,7 +193,7 @@ typedef enum{
                     break;
                 case 5:
                 {
-                    ZWTopSelectButton *topViewSixthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewSixthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewSixthbtn.tag=ZWTopSelectButtonTypeHeadSixth;
                     self.topViewSixthbtn=topViewSixthbtn;
                     [self setupBtnContentState:self.topViewSixthbtn index:i];
@@ -191,7 +201,7 @@ typedef enum{
                     break;
                 case 6:
                 {
-                    ZWTopSelectButton *topViewSeventhbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewSeventhbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewSeventhbtn.tag=ZWTopSelectButtonTypeHeadSeventh;
                     self.topViewSeventhbtn=topViewSeventhbtn;
                     [self setupBtnContentState:self.topViewSeventhbtn index:i];
@@ -199,7 +209,7 @@ typedef enum{
                     break;
                 case 7:
                 {
-                    ZWTopSelectButton *topViewEighthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewEighthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
                     topViewEighthbtn.tag=ZWTopSelectButtonTypeHeadEighth;
                     self.topViewEighthbtn=topViewEighthbtn;
                     [self setupBtnContentState:self.topViewEighthbtn index:i];
@@ -207,7 +217,8 @@ typedef enum{
                     break;
                 case 8:
                 {
-                    ZWTopSelectButton *topViewNinthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, 50)];
+                    ZWTopSelectButton *topViewNinthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+
                     topViewNinthbtn.tag=ZWTopSelectButtonTypeHeadNinth;
                     self.topViewNinthbtn=topViewNinthbtn;
                     [self setupBtnContentState:self.topViewNinthbtn index:i];
@@ -220,13 +231,18 @@ typedef enum{
 }
 -(void)setupViewUnderContent
 {
-    self.viewUnder=[[UIView alloc]initWithFrame:CGRectMake(0, 48, self.frame.size.width/self.contentVC.childViewControllers.count, 2)];
+
+
+    self.viewUnder=[[UIView alloc]initWithFrame:CGRectMake(0, (self.topViewHeight)-2, self.frame.size.width/self.contentVC.childViewControllers.count, 2)];
     self.viewUnder.backgroundColor=[UIColor redColor];
-    [self.viewTop addSubview:_viewUnder];}
+    [self.viewTop addSubview:_viewUnder];
+      //  NSLog(@"%f -------",underViewInitHeight);
+}
+
 -(void)setupContentViewContent
 {
     // UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NavigationBar_HEIGHT+70, self.frame.size.width, self.frame.size.height-64)];
-    UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0,50, self.frame.size.width, self.frame.size.height-64)];
+    UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64)];
     [self.contentVC.view addSubview:contentView];
     self.contentView=contentView;
     //self.contentView.backgroundColor=[UIColor yellowColor];
@@ -270,8 +286,9 @@ typedef enum{
     [self.viewTop addSubview:btn];
 }
 -(void)underViewMoveTo:(int)index{
+    self.topViewHeight=[self setupTopViewHeight];
     [UIView animateWithDuration:0.7 animations:^{
-        self.viewUnder.frame=CGRectMake(index *(self.frame.size.width/self.index), 48, self.frame.size.width/self.index, 2);
+        self.viewUnder.frame=CGRectMake(index *(self.frame.size.width/self.index), (self.topViewHeight)-2, self.frame.size.width/self.index, 2);
     }];
 }
 

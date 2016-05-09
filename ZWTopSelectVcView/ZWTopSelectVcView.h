@@ -34,6 +34,8 @@
  
  */
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+//顶部高度设置
+-(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)ZWTopSelectVcView;
 
 @end
 

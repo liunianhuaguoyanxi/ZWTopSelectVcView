@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZWTopSelectButton;
+@protocol ZWTopSelectButtonDelegate <NSObject>
 
+@optional
+//高度设置
+-(CGFloat)topSelectBtnHeightInZWTopSelectButtonDelegate:(ZWTopSelectButton *)topSelectButton;
+
+@end
 @interface ZWTopSelectButton : UIButton
 -(void)setState:(BOOL)state;
 
@@ -15,4 +22,5 @@
 @property (nonatomic ,strong) UIView  *viewLine;
 @property (nonatomic ,strong) UIColor *selectedColor;
 @property (nonatomic ,strong) UIColor *notSelectedColor;
+@property (nonatomic, weak) id<ZWTopSelectButtonDelegate > delegata;
 @end

@@ -5,11 +5,13 @@
 //  Created by 流年划过颜夕 on 16/5/6.
 //  Copyright © 2016年 流年划过颜夕. All rights reserved.
 //
+#define topSelectBtnInitHeight self.topSelectBtnHeight
+#define topSelectBtnInitY (self.frame.size.height-topSelectBtnInitHeight)/2
 
 #import "ZWTopSelectButton.h"
 
 @interface ZWTopSelectButton()
-
+@property (nonatomic, assign) float topSelectBtnHeight;
 
 @end
 @implementation ZWTopSelectButton
@@ -28,7 +30,7 @@
         UILabel *labName=[[UILabel alloc]init];
         labName.textAlignment=NSTextAlignmentCenter;
         labName.textColor=[UIColor redColor];
-        labName.font=[UIFont systemFontOfSize:15];
+        labName.font=[UIFont systemFontOfSize:14];
         [self addSubview:labName];
         self.labName=labName;
         
@@ -41,12 +43,21 @@
     return self;
 }
 
-
+-(float)topSelectBtnHeight
+{
+    if ([self.delegata respondsToSelector:@selector(topSelectBtnHeightInZWTopSelectButtonDelegate:)]) {
+       return  [self.delegata topSelectBtnHeightInZWTopSelectButtonDelegate:self];
+    }else
+    {
+        return 30;
+    }
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     self.labName.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    self.viewLine.frame=CGRectMake(self.frame.size.width-1, self.frame.size.height/2-15, 1, 30);
+    float  topSelectBtnInithalfHeight =topSelectBtnInitHeight/2;
+    self.viewLine.frame=CGRectMake(self.frame.size.width-1, self.frame.size.height/2-topSelectBtnInithalfHeight, 1, topSelectBtnInitHeight);
 }
 -(void)setState:(BOOL)state{
     if (state==YES) {
