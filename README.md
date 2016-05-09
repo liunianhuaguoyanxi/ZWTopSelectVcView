@@ -1,19 +1,19 @@
 # ZWTopSelectVcView
 ##快速导入多个控制器，通过顶部选择菜单切换控制器，实现一个页面多个控制器切换处理
-# 使用方法：
-## 导入头文件
+# How to use：
+## Import the header file
     #import "ZWTopSelectButton.h"
     #import "ZWTopSelectVcView.h"
-##### 初始化ZWTopSelectVcView
+##### 1.To initialize the ZWTopSelectVcView
     ZWTopSelectVcView *topSelectVcView=[[ZWTopSelectVcView alloc]init];
     topSelectVcView.frame=self.view.frame;
     [self.view addSubview:topSelectVcView];
     self.topSelectVcView=topSelectVcView;
-##### 设置ZWTopSelectVcView的代理
+##### 2.Set the delegate of ZWTopSelectVcView
     self.topSelectVcView.delegate=self;
-#####开始ZWTopSelectVcViewUI绘制
+##### 3.Start drawing the UI
     [self.topSelectVcView setupZWTopSelectVcViewUI];
-##实现代理方法（必须实现，一步完成创建）
+##To implement proxy（Have to do）
    -(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
    {
    
@@ -27,7 +27,7 @@
     return controllerMutableArr;
    }
    
-####部分动画界面展示  
+####Show some of the effects 
   ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/push.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/水波.gif)
     ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/淡入淡出.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/翻转.gif)
       ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/覆盖.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/翻页.gif)
