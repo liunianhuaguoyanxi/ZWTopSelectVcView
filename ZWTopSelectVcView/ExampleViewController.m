@@ -56,7 +56,7 @@
 //    FlipFromLeft,               //左翻转
 //    FlipFromRight,              //右翻转
     
-    //控制器切换动画速度
+    //控制器切换动画时间
     //self.topSelectVcView.speedTime=1;
     //设置动画效果，默认为push
     // self.topSelectVcView.animationType=2;
@@ -120,7 +120,7 @@
     totalTopBtns.labName.text=@"欢迎使用";
 
 }
-//-(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)ZWTopSelectVcView
+//-(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 //{
 //    return 60;
 //}

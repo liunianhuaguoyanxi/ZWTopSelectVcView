@@ -34,8 +34,8 @@
  
  */
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
-//顶部高度设置
--(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)ZWTopSelectVcView;
+///顶部高度设置
+-(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
 @end
 
@@ -97,7 +97,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak  ) UIView *viewTop;
 ///设置动画时间
 @property (nonatomic, assign) float  speedTime;
-
+///动画效果
 @property (nonatomic) AnimationType  animationType;
 
 @end
