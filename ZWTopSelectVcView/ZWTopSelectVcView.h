@@ -22,6 +22,10 @@
  */
 -(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
+
+
+
+
 @optional
 /**
  *   统一通过totalTopBtns修改顶部控件样式
@@ -38,6 +42,10 @@
 -(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
 @end
+
+
+
+
 
 
 @interface ZWTopSelectVcView : UIView
