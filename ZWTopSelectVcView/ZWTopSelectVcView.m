@@ -12,9 +12,6 @@
 #define kWidth(R) (R)*(kScreenWidth)/320
 
 #import "ZWTopSelectButton.h"
-#import "OneTableViewController.h"
-#import "TwoTableViewController.h"
-#import "ThreeTableViewController.h"
 #import "ZWTopSelectVcView.h"
 static const CGFloat topViewHeight=50;
 @interface ZWTopSelectVcView();
@@ -125,6 +122,7 @@ typedef enum{
 -(void)setupContentVC
 {
     UIViewController *contentVC=[[UIViewController alloc]init];
+  //  contentVC.view.backgroundColor=[UIColor blueColor];
     [self addSubview:contentVC.view];
     self.contentVC=contentVC;
     self.contentVC.view.frame=CGRectMake(0, 0,self.frame.size.width, self.frame.size.height);
@@ -248,9 +246,7 @@ typedef enum{
 -(void)setupContentViewContent
 {
     // UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NavigationBar_HEIGHT+70, self.frame.size.width, self.frame.size.height-64)];
-    UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64)];
-    [self.contentVC.view addSubview:contentView];
-    self.contentView=contentView;
+
     //self.contentView.backgroundColor=[UIColor yellowColor];
     
     if (self.contentVC.childViewControllers.count==0||self.contentVC.childViewControllers.count>9) {
@@ -259,13 +255,14 @@ typedef enum{
     }else
     {
         self.showVC=self.contentVC.childViewControllers[0];
-        self.showVC.view.frame=self.contentView.bounds;
+        self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
         //self.showVC.view.backgroundColor=[UIColor clearColor];
+        [self.contentVC.view addSubview:self.showVC.view];
         if (self.showVC.title) {
             self.topViewFirstbtn.labName.text=self.showVC.title;
         }
         [self.topViewFirstbtn setState:YES];
-        [self.contentView addSubview:self.showVC.view];
+        
         [self setupShowVcRecognizer];
                // NSLog(@"%d --init",self.btnIndex);
     }
@@ -377,10 +374,9 @@ typedef enum{
     self.newindex=[btn.superview.subviews indexOfObject:btn];
     self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
     self.showVC=self.contentVC.childViewControllers[self.newindex];
-    
-    self.showVC.view.frame=self.contentView.bounds;
-    [self.contentView addSubview:self.showVC.view];
-    
+           // self.showVC.view.backgroundColor=[UIColor redColor];
+    self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
+    [self.contentVC.view addSubview:self.showVC.view];
     [self setupShowVcRecognizer];
 
     
@@ -435,9 +431,8 @@ typedef enum{
             [self.showVC.view removeFromSuperview];
             self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
             self.showVC=self.contentVC.childViewControllers[((self.btnIndex)?(self.btnIndex):0)];
-            self.showVC.view.frame=self.contentView.bounds;
-            [self.contentView addSubview:self.showVC.view];
-            
+            self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
+            [self.contentVC.view addSubview:self.showVC.view];
             [self setupShowVcRecognizer];
             
             [self setupbtnSelectIndex:self.btnIndex];
@@ -461,9 +456,8 @@ typedef enum{
             [self.showVC.view removeFromSuperview];
             self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
             self.showVC=self.contentVC.childViewControllers[((self.btnIndex)?(self.btnIndex):0)];
-            self.showVC.view.frame=self.contentView.bounds;
-            [self.contentView addSubview:self.showVC.view];
-            
+            self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
+            [self.contentVC.view addSubview:self.showVC.view];
             [self setupShowVcRecognizer];
             
             [self setupbtnSelectIndex:self.btnIndex];
@@ -489,76 +483,76 @@ typedef enum{
     if (state==YES) {
         
         //[self.contentView.layer removeAnimationForKey:@"push"];
-        [self.contentView.layer removeAllAnimations];
+        [self.showVC.view.layer removeAllAnimations];
     }else if(state==NO)
     {
 
         
-        [self transitionWithType:kCATransitionPush  ForView:self.contentView];
+        [self transitionWithType:kCATransitionPush  ForView:self.showVC.view];
         AnimationType animationType = self.animationType ? self.animationType : Push;
         
         switch (animationType) {
             case Fade:
-                [self transitionWithType:kCATransitionFade  ForView:self.contentView];
+                [self transitionWithType:kCATransitionFade  ForView:self.showVC.view];
                 break;
                 
             case Push:
-                [self transitionWithType:kCATransitionPush  ForView:self.contentView];
+                [self transitionWithType:kCATransitionPush  ForView:self.showVC.view];
                 break;
                 
             case Reveal:
-                [self transitionWithType:kCATransitionReveal  ForView:self.contentView];
+                [self transitionWithType:kCATransitionReveal  ForView:self.showVC.view];
                 break;
                 
             case MoveIn:
-                [self transitionWithType:kCATransitionMoveIn  ForView:self.contentView];
+                [self transitionWithType:kCATransitionMoveIn  ForView:self.showVC.view];
                 break;
                 
             case Cube:
-                [self transitionWithType:@"cube"  ForView:self.contentView];
+                [self transitionWithType:@"cube"  ForView:self.showVC.view];
                 break;
                 
             case SuckEffect:
-                [self transitionWithType:@"suckEffect"  ForView:self.contentView];
+                [self transitionWithType:@"suckEffect"  ForView:self.showVC.view];
                 break;
                 
             case OglFlip:
-                [self transitionWithType:@"oglFlip"  ForView:self.contentView];
+                [self transitionWithType:@"oglFlip"  ForView:self.showVC.view];
                 break;
                 
             case RippleEffect:
-                [self transitionWithType:@"rippleEffect"  ForView:self.contentView];
+                [self transitionWithType:@"rippleEffect"  ForView:self.showVC.view];
                 break;
                 
             case PageCurl:
-                [self transitionWithType:@"pageCurl"  ForView:self.contentView];
+                [self transitionWithType:@"pageCurl"  ForView:self.showVC.view];
                 break;
                 
             case PageUnCurl:
-                [self transitionWithType:@"pageUnCurl"  ForView:self.contentView];
+                [self transitionWithType:@"pageUnCurl"  ForView:self.showVC.view];
                 break;
                 
             case CameraIrisHollowOpen:
-                [self transitionWithType:@"cameraIrisHollowOpen"  ForView:self.contentView];
+                [self transitionWithType:@"cameraIrisHollowOpen"  ForView:self.showVC.view];
                 break;
                 
             case CameraIrisHollowClose:
-                [self transitionWithType:@"cameraIrisHollowClose"  ForView:self.contentView];
+                [self transitionWithType:@"cameraIrisHollowClose"  ForView:self.showVC.view];
                 break;
             case CurlDown:
-                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionCurlDown];
+                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionCurlDown];
                 break;
                 
             case CurlUp:
-                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionCurlUp];
+                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionCurlUp];
                 break;
                 
             case FlipFromLeft:
-                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionFlipFromLeft];
+                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionFlipFromLeft];
                 break;
                 
             case FlipFromRight:
-                [self animationWithView:self.contentView WithAnimationTransition:UIViewAnimationTransitionFlipFromRight];
+                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionFlipFromRight];
 
             default:
                 break;
