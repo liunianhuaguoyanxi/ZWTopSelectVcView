@@ -28,6 +28,10 @@ static const CGFloat topViewHeight=50;
 @property (nonatomic, assign) int             titleCompareIndex;
 @property (nonatomic, strong) NSMutableArray   *titleIndexArr;
 @property (nonatomic, strong) NSMutableArray   *titleArr;
+@property (nonatomic, assign) int              btnIndex;
+@property (nonatomic, strong)  UISwipeGestureRecognizer *recognizerLeft;
+@property (nonatomic, strong)  UISwipeGestureRecognizer *recognizerRight;
+
 @end
 typedef enum{
     ZWTopSelectButtonTypeHeadFirst,
@@ -53,6 +57,8 @@ typedef enum{
     
     
     [self setupChildViewController];
+    
+
     
 }
 -(CGFloat)setupTopViewHeight
@@ -115,6 +121,7 @@ typedef enum{
 /**
  *  其他设置
  */
+
 -(void)setupContentVC
 {
     UIViewController *contentVC=[[UIViewController alloc]init];
@@ -131,7 +138,6 @@ typedef enum{
 }
 -(void)setupViewTopContent
 {
-    //    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, NavigationBar_HEIGHT+20, self.frame.size.width, topViewHeight)];
     self.topViewHeight=[self setupTopViewHeight];
     UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.topViewHeight)];
     viewTop.backgroundColor=[UIColor whiteColor];
@@ -260,6 +266,8 @@ typedef enum{
         }
         [self.topViewFirstbtn setState:YES];
         [self.contentView addSubview:self.showVC.view];
+        [self setupShowVcRecognizer];
+               // NSLog(@"%d --init",self.btnIndex);
     }
 }
 -(void)setupBtnContentState:(ZWTopSelectButton *)btn index:(int)index
@@ -292,20 +300,9 @@ typedef enum{
     }];
 }
 
--(void)btnHeadClickType:(ZWTopSelectButton *)btn
+-(void)setupbtnSelectIndex:(int)btnSelectIndex
 {
-    
-    [self.showVC.view removeFromSuperview];
-    self.newindex=[btn.superview.subviews indexOfObject:btn];
-    self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
-    
-    
-    self.showVC=self.contentVC.childViewControllers[self.newindex];
-    self.showVC.view.frame=self.contentView.bounds;
-    [self.contentView addSubview:self.showVC.view];
-    [self setupActionState:self.closeAnimation];
-    
-    switch (btn.tag) {
+    switch (btnSelectIndex) {
         case ZWTopSelectButtonTypeHeadFirst:
         {
             [self setupBtnState];
@@ -371,8 +368,111 @@ typedef enum{
             break;
             
     }
+
+}
+-(void)btnHeadClickType:(ZWTopSelectButton *)btn
+{
+    self.btnIndex=(int)btn.tag;
+    [self.showVC.view removeFromSuperview];
+    self.newindex=[btn.superview.subviews indexOfObject:btn];
+    self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
+    self.showVC=self.contentVC.childViewControllers[self.newindex];
+    
+    self.showVC.view.frame=self.contentView.bounds;
+    [self.contentView addSubview:self.showVC.view];
+    
+    [self setupShowVcRecognizer];
+
+    
+
+
+              //  NSLog(@"%d --init222",self.btnIndex);
+    
+    
+    [self setupActionState:self.isCloseAnimation];
+    
+    [self setupbtnSelectIndex:(int)btn.tag];
+}
+
+//手势初始化
+-(void)setupShowVcRecognizer
+{
+    if (self.isCloseSwipeGesture) {
+
+    }else{
+        self.recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+        
+        [self.recognizerLeft  setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+        
+        [self.showVC.view addGestureRecognizer:self.recognizerLeft ];
+        
+        
+        
+        
+        
+        self.recognizerRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+        
+        [self.recognizerRight  setDirection:(UISwipeGestureRecognizerDirectionRight)];
+        
+        [self.showVC.view addGestureRecognizer:self.recognizerRight ];
+    }
     
 }
+//手势实现内容
+-(void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer{
+    
+    //如果往右滑
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
+        self.btnIndex--;
+        // NSLog(@"%d --left f",self.btnIndex);
+        if (self.btnIndex<0)
+        {
+            self.btnIndex=0;
+            
+        }else
+        {
+            [self.showVC.view removeFromSuperview];
+            self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
+            self.showVC=self.contentVC.childViewControllers[((self.btnIndex)?(self.btnIndex):0)];
+            self.showVC.view.frame=self.contentView.bounds;
+            [self.contentView addSubview:self.showVC.view];
+            
+            [self setupShowVcRecognizer];
+            
+            [self setupbtnSelectIndex:self.btnIndex];
+            // NSLog(@"%d --left",self.btnIndex);
+        }
+    }
+    
+    
+    
+    
+    //如果往左滑
+    
+    if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
+        
+        self.btnIndex++;
+        
+        if (self.btnIndex>self.contentVC.childViewControllers.count-1) {
+            self.btnIndex=(int)self.contentVC.childViewControllers.count-1;
+        }else{
+            
+            [self.showVC.view removeFromSuperview];
+            self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
+            self.showVC=self.contentVC.childViewControllers[((self.btnIndex)?(self.btnIndex):0)];
+            self.showVC.view.frame=self.contentView.bounds;
+            [self.contentView addSubview:self.showVC.view];
+            
+            [self setupShowVcRecognizer];
+            
+            [self setupbtnSelectIndex:self.btnIndex];
+            //  NSLog(@"%d --rigth",self.btnIndex);
+        }
+    }
+    
+}
+
 -(void)setupBtnState
 {
     [self.topViewFirstbtn setState:NO];

@@ -89,11 +89,9 @@
     //第一步
     NSMutableArray *controllerMutableArr=[NSMutableArray array];
     
-    //第二步
     OneTableViewController *one= [[OneTableViewController alloc]init];
-    one.title=@"欢迎1";
+    one.title=@"欢迎2";
     [controllerMutableArr addObject:one];
-    
     
     TwoTableViewController *one1= [[TwoTableViewController alloc]init];
     one1.title=@"欢迎2";
@@ -128,4 +126,5 @@
 //{
 //    return 60;
 //}
+
 @end

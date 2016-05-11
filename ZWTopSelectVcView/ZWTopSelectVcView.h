@@ -88,7 +88,7 @@ typedef enum : NSUInteger {
 } AnimationType;
 
 ///是否关闭动画
-@property (nonatomic, assign) BOOL   closeAnimation;
+@property (nonatomic, assign) BOOL   isCloseAnimation;
 ///底部滑块
 @property (nonatomic ,strong) UIView *viewUnder;
 ///装子控制器容器
@@ -99,6 +99,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) float  speedTime;
 ///动画效果
 @property (nonatomic) AnimationType  animationType;
-
+///关闭左右手势滑动功能
+@property (nonatomic, assign) BOOL isCloseSwipeGesture;
 @end
 
