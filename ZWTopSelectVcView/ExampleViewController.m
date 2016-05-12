@@ -57,13 +57,13 @@
 //    FlipFromRight,              //右翻转
     
     //控制器切换动画时间
-    //self.topSelectVcView.speedTime=1;
+//    self.topSelectVcView.speedTime=1;
     //设置动画效果，默认为push
-    // self.topSelectVcView.animationType=2;
+//     self.topSelectVcView.animationType=15;
     //关闭动画效果
     // self.topSelectVcView.closeAnimation=YES;
     //隐藏底部滑块
-    // self.topSelectVcView.viewUnder.hidden=YES;
+//    self.topSelectVcView.viewUnder.hidden=YES;
     
     
     //单个设置(可选) ：通过topSelectVcView找到对应的单个顶部button，从左到右如,topViewFirstbtn，topViewSecondbtn,topViewThirdbtn,以此类推;
@@ -116,15 +116,55 @@
 
     // 优先级最低
     totalTopBtns.labName.text=@"欢迎使用";
+    
 
 }
+//
+/////顶部topview高度
 //-(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 //{
 //    return 60;
 //}
+/////顶部topview宽度
+//-(CGFloat)topViewWidthInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return 260;
+//}
+/////顶部topview X
+//-(CGFloat)topViewXInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return  (self.view.frame.size.width-260)/2;
+//}
+//
+/////顶部topview Y
+//-(CGFloat)topViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return  0;
+//}
+//
+/////子控制器childVcViewY
+//-(CGFloat)childVcViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return 100;
+//}
+/////子控制器childVcViewX
+//-(CGFloat)childVcViewXInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return  20;
+//}
+/////子控制器childVcView高度
+//-(CGFloat)childVcViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return 200;
+//}
+/////子控制器childVcView宽度
+//-(CGFloat)childVcViewWidthInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return 200;
+//}
+#pragma mark - ZWTopSelectButtonDelegate
 //-(CGFloat)topSelectBtnHeightInZWTopSelectButtonDelegate:(ZWTopSelectButton *)topSelectButton
 //{
 //    return 60;
 //}
-
 @end

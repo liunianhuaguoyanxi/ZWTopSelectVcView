@@ -11,11 +11,25 @@
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kWidth(R) (R)*(kScreenWidth)/320
 
+
 #import "ZWTopSelectButton.h"
 #import "ZWTopSelectVcView.h"
-static const CGFloat topViewHeight=50;
+static const CGFloat originalTopViewHeight=50;
+static const CGFloat originalChildVcViewHeight=50;
+
 @interface ZWTopSelectVcView();
 @property (nonatomic, assign) CGFloat      topViewHeight;
+@property (nonatomic, assign) CGFloat      topViewWidth;
+@property (nonatomic, assign) CGFloat      topViewX;
+@property (nonatomic, assign) CGFloat      topViewY;
+
+@property (nonatomic, assign) CGFloat      childVcViewHeight;
+@property (nonatomic, assign) CGFloat      childVcViewWidth;
+@property (nonatomic, assign) CGFloat      childVcViewX;
+@property (nonatomic, assign) CGFloat      childVcViewY;
+
+///装子控制器容器
+@property (nonatomic ,weak  ) UIView           *animationChangeView;
 @property (nonatomic ,weak  ) UIViewController *showVC;
 @property (nonatomic ,strong) UIViewController *contentVC;
 @property (nonatomic, assign) int              index;
@@ -26,6 +40,8 @@ static const CGFloat topViewHeight=50;
 @property (nonatomic, strong) NSMutableArray   *titleIndexArr;
 @property (nonatomic, strong) NSMutableArray   *titleArr;
 @property (nonatomic, assign) int              btnIndex;
+///顶部容器
+@property (nonatomic, weak  ) UIView *viewTop;
 @property (nonatomic, strong)  UISwipeGestureRecognizer *recognizerLeft;
 @property (nonatomic, strong)  UISwipeGestureRecognizer *recognizerRight;
 
@@ -58,13 +74,69 @@ typedef enum{
 
     
 }
+
 -(CGFloat)setupTopViewHeight
 {
     if ([self.delegate respondsToSelector:@selector(topViewHeightInZWTopSelectVcView:)]) {
         return  [self.delegate topViewHeightInZWTopSelectVcView:self];
     }else{
-        return topViewHeight;}
+        return originalTopViewHeight;}
 }
+-(CGFloat)setupTopViewWidth
+{
+    if ([self.delegate respondsToSelector:@selector(topViewWidthInZWTopSelectVcView:)]) {
+        return  [self.delegate topViewWidthInZWTopSelectVcView:self];
+    }else{
+        return self.frame.size.width;}
+}
+
+-(CGFloat)setupTopViewX
+{
+    if ([self.delegate respondsToSelector:@selector(topViewXInZWTopSelectVcView:)]) {
+        return  [self.delegate topViewXInZWTopSelectVcView:self];
+    }else{
+        return 0;}
+}
+
+-(CGFloat)setupTopViewY
+{
+    if ([self.delegate respondsToSelector:@selector(topViewYInZWTopSelectVcView:)]) {
+        return  [self.delegate topViewYInZWTopSelectVcView:self];
+    }else{
+        return 0;}
+}
+
+-(CGFloat)setupChildVcViewHeight
+{
+    if ([self.delegate respondsToSelector:@selector(childVcViewHeightInZWTopSelectVcView:)]) {
+        return  [self.delegate childVcViewHeightInZWTopSelectVcView:self];
+    }else{
+        return self.frame.size.height;}
+}
+-(CGFloat)setupChildVcViewWidth
+{
+    if ([self.delegate respondsToSelector:@selector(childVcViewWidthInZWTopSelectVcView:)]) {
+        return  [self.delegate childVcViewHeightInZWTopSelectVcView:self];
+    }else{
+        return self.frame.size.width;}
+}
+
+-(CGFloat)setupChildVcViewX
+{
+    if ([self.delegate respondsToSelector:@selector(childVcViewXInZWTopSelectVcView:)]) {
+        return  [self.delegate childVcViewXInZWTopSelectVcView:self];
+    }else{
+        return 0;}
+}
+
+-(CGFloat)setupChildVcViewY
+{
+    if ([self.delegate respondsToSelector:@selector(childVcViewYInZWTopSelectVcView:)]) {
+        return  [self.delegate childVcViewYInZWTopSelectVcView:self];
+    }else{
+        return  originalChildVcViewHeight;}
+}
+
 -(NSMutableArray *)titleIndexArr
 {
     if (!_titleIndexArr) {
@@ -134,10 +206,20 @@ typedef enum{
     [self setupViewUnderContent];
     [self setupContentViewContent];
 }
--(void)setupViewTopContent
+-(void)setupViewTopContent 
 {
     self.topViewHeight=[self setupTopViewHeight];
-    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.topViewHeight)];
+    self.topViewWidth = [self setupTopViewWidth];
+    self.topViewX=[self setupTopViewX];
+    self.topViewY=[self setupTopViewY];
+    
+    self.childVcViewHeight=[self setupChildVcViewHeight];
+    self.childVcViewWidth= [self setupChildVcViewHeight];
+    self.childVcViewX=[self setupChildVcViewX];
+    self.childVcViewY=[self setupChildVcViewY];
+    
+    
+    UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(_topViewX, _topViewY, _topViewWidth, _topViewHeight)];
     viewTop.backgroundColor=[UIColor whiteColor];
     [self addSubview:viewTop];
     self.viewTop=viewTop;
@@ -153,7 +235,7 @@ typedef enum{
             switch (i) {
                 case 0:
                 {
-                    ZWTopSelectButton *topViewFirstbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(0,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewFirstbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(0,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewFirstbtn.tag=ZWTopSelectButtonTypeHeadFirst;
                     self.topViewFirstbtn=topViewFirstbtn;
                     [self setupBtnContentState:self.topViewFirstbtn index:i];
@@ -164,7 +246,7 @@ typedef enum{
                     break;
                 case 1:
                 {
-                    ZWTopSelectButton *topViewSecondbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewSecondbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewSecondbtn.tag=ZWTopSelectButtonTypeHeadSecond;
                     self.topViewSecondbtn=topViewSecondbtn;
                     [self setupBtnContentState:self.topViewSecondbtn  index:i];
@@ -172,7 +254,7 @@ typedef enum{
                     break;
                 case 2:
                 {
-                    ZWTopSelectButton *topViewThirdbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewThirdbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewThirdbtn.tag=ZWTopSelectButtonTypeHeadThird;
                     self.topViewThirdbtn=topViewThirdbtn;
                     [self setupBtnContentState:self.topViewThirdbtn index:i];
@@ -181,7 +263,7 @@ typedef enum{
                     break;
                 case 3:
                 {
-                    ZWTopSelectButton *topViewFourthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewFourthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewFourthbtn.tag=ZWTopSelectButtonTypeHeadFourth;
                     self.topViewFourthbtn=topViewFourthbtn;
                     [self setupBtnContentState:self.topViewFourthbtn index:i];
@@ -189,7 +271,7 @@ typedef enum{
                     break;
                 case 4:
                 {
-                    ZWTopSelectButton *topViewFifthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewFifthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewFifthbtn.tag=ZWTopSelectButtonTypeHeadFifth;
                     self.topViewFifthbtn=topViewFifthbtn;
                     [self setupBtnContentState:self.topViewFifthbtn index:i];
@@ -197,7 +279,7 @@ typedef enum{
                     break;
                 case 5:
                 {
-                    ZWTopSelectButton *topViewSixthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewSixthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewSixthbtn.tag=ZWTopSelectButtonTypeHeadSixth;
                     self.topViewSixthbtn=topViewSixthbtn;
                     [self setupBtnContentState:self.topViewSixthbtn index:i];
@@ -205,7 +287,7 @@ typedef enum{
                     break;
                 case 6:
                 {
-                    ZWTopSelectButton *topViewSeventhbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewSeventhbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewSeventhbtn.tag=ZWTopSelectButtonTypeHeadSeventh;
                     self.topViewSeventhbtn=topViewSeventhbtn;
                     [self setupBtnContentState:self.topViewSeventhbtn index:i];
@@ -213,7 +295,7 @@ typedef enum{
                     break;
                 case 7:
                 {
-                    ZWTopSelectButton *topViewEighthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewEighthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
                     topViewEighthbtn.tag=ZWTopSelectButtonTypeHeadEighth;
                     self.topViewEighthbtn=topViewEighthbtn;
                     [self setupBtnContentState:self.topViewEighthbtn index:i];
@@ -221,7 +303,7 @@ typedef enum{
                     break;
                 case 8:
                 {
-                    ZWTopSelectButton *topViewNinthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(self.frame.size.width/self.contentVC.childViewControllers.count*i,0, self.frame.size.width/self.contentVC.childViewControllers.count, self.topViewHeight)];
+                    ZWTopSelectButton *topViewNinthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
 
                     topViewNinthbtn.tag=ZWTopSelectButtonTypeHeadNinth;
                     self.topViewNinthbtn=topViewNinthbtn;
@@ -237,7 +319,7 @@ typedef enum{
 {
 
 
-    self.viewUnder=[[UIView alloc]initWithFrame:CGRectMake(0, (self.topViewHeight)-2, self.frame.size.width/self.contentVC.childViewControllers.count, 2)];
+    self.viewUnder=[[UIView alloc]initWithFrame:CGRectMake(0, (_topViewHeight)-2, (_topViewWidth)/self.contentVC.childViewControllers.count, 2)];
     self.viewUnder.backgroundColor=[UIColor redColor];
     [self.viewTop addSubview:_viewUnder];
       //  NSLog(@"%f -------",underViewInitHeight);
@@ -245,9 +327,12 @@ typedef enum{
 
 -(void)setupContentViewContent
 {
-    // UIView *contentView=[[UIView alloc]initWithFrame:CGRectMake(0, NavigationBar_HEIGHT+70, self.frame.size.width, self.frame.size.height-64)];
+    
+     UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(_childVcViewX,_childVcViewY, _childVcViewWidth,_childVcViewHeight)];
+    [self.contentVC.view addSubview:animationChangeView];
+    self.animationChangeView =animationChangeView;
+    
 
-    //self.contentView.backgroundColor=[UIColor yellowColor];
     
     if (self.contentVC.childViewControllers.count==0||self.contentVC.childViewControllers.count>9) {
         [self removeFromSuperview];
@@ -255,9 +340,9 @@ typedef enum{
     }else
     {
         self.showVC=self.contentVC.childViewControllers[0];
-        self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
+        self.showVC.view.frame=self.animationChangeView.bounds;
         //self.showVC.view.backgroundColor=[UIColor clearColor];
-        [self.contentVC.view addSubview:self.showVC.view];
+        [self.animationChangeView addSubview:self.showVC.view];
         if (self.showVC.title) {
             self.topViewFirstbtn.labName.text=self.showVC.title;
         }
@@ -291,9 +376,8 @@ typedef enum{
     [self.viewTop addSubview:btn];
 }
 -(void)underViewMoveTo:(int)index{
-    self.topViewHeight=[self setupTopViewHeight];
     [UIView animateWithDuration:0.7 animations:^{
-        self.viewUnder.frame=CGRectMake(index *(self.frame.size.width/self.index), (self.topViewHeight)-2, self.frame.size.width/self.index, 2);
+        self.viewUnder.frame=CGRectMake(index *((_topViewWidth)/self.index), (_topViewHeight)-2, (_topViewWidth)/self.index, 2);
     }];
 }
 
@@ -369,14 +453,16 @@ typedef enum{
 }
 -(void)btnHeadClickType:(ZWTopSelectButton *)btn
 {
+
     self.btnIndex=(int)btn.tag;
     [self.showVC.view removeFromSuperview];
     self.newindex=[btn.superview.subviews indexOfObject:btn];
     self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
+    
     self.showVC=self.contentVC.childViewControllers[self.newindex];
            // self.showVC.view.backgroundColor=[UIColor redColor];
-    self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
-    [self.contentVC.view addSubview:self.showVC.view];
+    self.showVC.view.frame=self.animationChangeView.bounds;
+    [self.animationChangeView addSubview:self.showVC.view];
     [self setupShowVcRecognizer];
 
     
@@ -431,8 +517,8 @@ typedef enum{
             [self.showVC.view removeFromSuperview];
             self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
             self.showVC=self.contentVC.childViewControllers[((self.btnIndex)?(self.btnIndex):0)];
-            self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
-            [self.contentVC.view addSubview:self.showVC.view];
+            self.showVC.view.frame=self.animationChangeView.bounds;
+            [self.animationChangeView addSubview:self.showVC.view];
             [self setupShowVcRecognizer];
             
             [self setupbtnSelectIndex:self.btnIndex];
@@ -456,8 +542,8 @@ typedef enum{
             [self.showVC.view removeFromSuperview];
             self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
             self.showVC=self.contentVC.childViewControllers[((self.btnIndex)?(self.btnIndex):0)];
-            self.showVC.view.frame=CGRectMake(0,self.topViewHeight, self.frame.size.width, self.frame.size.height-64);
-            [self.contentVC.view addSubview:self.showVC.view];
+            self.showVC.view.frame=self.animationChangeView.bounds;
+            [self.animationChangeView addSubview:self.showVC.view];
             [self setupShowVcRecognizer];
             
             [self setupbtnSelectIndex:self.btnIndex];
@@ -483,76 +569,76 @@ typedef enum{
     if (state==YES) {
         
         //[self.contentView.layer removeAnimationForKey:@"push"];
-        [self.showVC.view.layer removeAllAnimations];
+        [self.animationChangeView.layer removeAllAnimations];
     }else if(state==NO)
     {
 
-        
-        [self transitionWithType:kCATransitionPush  ForView:self.showVC.view];
-        AnimationType animationType = self.animationType ? self.animationType : Push;
-        
-        switch (animationType) {
+        if (!self.animationType) {
+            self.animationType=Push;
+        }
+;
+        switch (self.animationType) {
             case Fade:
-                [self transitionWithType:kCATransitionFade  ForView:self.showVC.view];
+                [self transitionWithType:kCATransitionFade  ForView:self.animationChangeView];
                 break;
                 
             case Push:
-                [self transitionWithType:kCATransitionPush  ForView:self.showVC.view];
+                [self transitionWithType:kCATransitionPush  ForView:self.animationChangeView];
                 break;
                 
             case Reveal:
-                [self transitionWithType:kCATransitionReveal  ForView:self.showVC.view];
+                [self transitionWithType:kCATransitionReveal  ForView:self.animationChangeView];
                 break;
                 
             case MoveIn:
-                [self transitionWithType:kCATransitionMoveIn  ForView:self.showVC.view];
+                [self transitionWithType:kCATransitionMoveIn  ForView:self.animationChangeView];
                 break;
                 
             case Cube:
-                [self transitionWithType:@"cube"  ForView:self.showVC.view];
+                [self transitionWithType:@"cube"  ForView:self.animationChangeView];
                 break;
                 
             case SuckEffect:
-                [self transitionWithType:@"suckEffect"  ForView:self.showVC.view];
+                [self transitionWithType:@"suckEffect"  ForView:self.animationChangeView];
                 break;
                 
             case OglFlip:
-                [self transitionWithType:@"oglFlip"  ForView:self.showVC.view];
+                [self transitionWithType:@"oglFlip"  ForView:self.animationChangeView];
                 break;
                 
             case RippleEffect:
-                [self transitionWithType:@"rippleEffect"  ForView:self.showVC.view];
+                [self transitionWithType:@"rippleEffect"  ForView:self.animationChangeView];
                 break;
                 
             case PageCurl:
-                [self transitionWithType:@"pageCurl"  ForView:self.showVC.view];
+                [self transitionWithType:@"pageCurl"  ForView:self.animationChangeView];
                 break;
                 
             case PageUnCurl:
-                [self transitionWithType:@"pageUnCurl"  ForView:self.showVC.view];
+                [self transitionWithType:@"pageUnCurl"  ForView:self.animationChangeView];
                 break;
                 
             case CameraIrisHollowOpen:
-                [self transitionWithType:@"cameraIrisHollowOpen"  ForView:self.showVC.view];
+                [self transitionWithType:@"cameraIrisHollowOpen"  ForView:self.animationChangeView];
                 break;
                 
             case CameraIrisHollowClose:
-                [self transitionWithType:@"cameraIrisHollowClose"  ForView:self.showVC.view];
+                [self transitionWithType:@"cameraIrisHollowClose"  ForView:self.animationChangeView];
                 break;
             case CurlDown:
-                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionCurlDown];
+                [self animationWithView:self.animationChangeView WithAnimationTransition:UIViewAnimationTransitionCurlDown];
                 break;
                 
             case CurlUp:
-                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionCurlUp];
+                [self animationWithView:self.animationChangeView WithAnimationTransition:UIViewAnimationTransitionCurlUp];
                 break;
                 
             case FlipFromLeft:
-                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionFlipFromLeft];
+                [self animationWithView:self.animationChangeView WithAnimationTransition:UIViewAnimationTransitionFlipFromLeft];
                 break;
                 
             case FlipFromRight:
-                [self animationWithView:self.showVC.view WithAnimationTransition:UIViewAnimationTransitionFlipFromRight];
+                [self animationWithView:self.animationChangeView WithAnimationTransition:UIViewAnimationTransitionFlipFromRight];
 
             default:
                 break;
@@ -585,6 +671,7 @@ typedef enum{
     
     //设置运动速度
     animation.timingFunction = UIViewAnimationOptionCurveEaseInOut;
+    NSLog(@"%@ +++",view.layer);
     
     [view.layer addAnimation:animation forKey:@"animation"];
 }

@@ -36,6 +36,22 @@
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 ///顶部高度设置
 -(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+///顶部宽度设置
+-(CGFloat)topViewWidthInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+///顶部X设置
+-(CGFloat)topViewXInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+///顶部Y设置
+-(CGFloat)topViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
+
+///子控制器高度设置
+-(CGFloat)childVcViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+///子控制器宽度设置
+-(CGFloat)childVcViewWidthInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+///子控制器X设置
+-(CGFloat)childVcViewXInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+///子控制器Y设置
+-(CGFloat)childVcViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
 @end
 
@@ -91,14 +107,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL   isCloseAnimation;
 ///底部滑块
 @property (nonatomic ,strong) UIView *viewUnder;
-///装子控制器容器
-@property (nonatomic ,weak  ) UIView *contentView;
-///顶部容器
-@property (nonatomic, weak  ) UIView *viewTop;
+
 ///设置动画时间
 @property (nonatomic, assign) float  speedTime;
 ///动画效果
-@property (nonatomic) AnimationType  animationType;
+@property (nonatomic, assign) AnimationType  animationType;
 ///关闭左右手势滑动功能
 @property (nonatomic, assign) BOOL isCloseSwipeGesture;
 @end
