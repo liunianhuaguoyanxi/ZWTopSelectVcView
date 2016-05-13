@@ -26,10 +26,15 @@
     
     return controllerMutableArr;
    }
-   
+####Show What it is    
+![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/push.gif)
+####Show custom size 
+![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/自定义尺寸.gif)
+####Show one controller can have multiple ZWTopSelectVcView
+![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/多个view.gif)
 ####Show some of the effects 
-  ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/push.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/水波.gif)
-    ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/淡入淡出.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/翻转.gif)
-      ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/覆盖.gif) ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/翻页.gif)
+
+![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/水波.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/淡入淡出.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻转.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/覆盖.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻页.gif)
+
 ####具体设置详情在demo中
 ####如果你有任何疑问，欢迎随时发邮件到menglanfenghen@163.com
