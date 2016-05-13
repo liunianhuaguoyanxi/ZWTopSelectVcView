@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navback"] forBarMetrics:UIBarMetricsDefault];
-
+   [self setTitle:@"欢迎使用ZWTopSelectVcView"];
 
     
 }

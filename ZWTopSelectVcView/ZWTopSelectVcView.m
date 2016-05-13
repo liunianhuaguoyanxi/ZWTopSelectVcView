@@ -198,7 +198,7 @@ typedef enum{
     [self addSubview:contentVC.view];
     self.contentVC=contentVC;
     self.contentVC.view.frame=CGRectMake(0, 0,self.frame.size.width, self.frame.size.height);
-    self.contentVC.view.backgroundColor=[UIColor redColor];
+    //self.contentVC.view.backgroundColor=[UIColor redColor];
 }
 -(void)setupContentView
 {
@@ -336,7 +336,7 @@ typedef enum{
      UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(self.childVcViewX,self.childVcViewY, self.childVcViewWidth,_childVcViewHeight)];
     [self.contentVC.view addSubview:animationChangeView];
     self.animationChangeView =animationChangeView;
-    animationChangeView.backgroundColor=[UIColor redColor];
+  //  animationChangeView.backgroundColor=[UIColor redColor];
     
 
     

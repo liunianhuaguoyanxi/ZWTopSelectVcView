@@ -14,10 +14,13 @@
 #import "TwoTableViewController.h"
 #import "ThreeTableViewController.h"
 #import "FourViewController.h"
+/**
+ *  基本使用
+ */
 
 @interface ExampleViewController ()<ZWTopSelectVcViewDelegate>
 @property (nonatomic, weak) ZWTopSelectVcView *topSelectVcView;
-@property (nonatomic, weak) ZWTopSelectVcView *topSelectVcView1;
+
 @end
 
 @implementation ExampleViewController
@@ -25,7 +28,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"欢迎使用ZWTopSelectVcView";
 
     //第一步：初始化ZWTopSelectVcView，把其加入当前控制器view中
     ZWTopSelectVcView *topSelectVcView=[[ZWTopSelectVcView alloc]init];
@@ -63,13 +65,13 @@
 //    FlipFromRight,              //右翻转
     
     //控制器切换动画时间
-//    self.topSelectVcView.speedTime=1;
+    //self.topSelectVcView.speedTime=1;
     //设置动画效果，默认为push
-     self.topSelectVcView.animationType=8;
+    // self.topSelectVcView.animationType=8;
     //关闭动画效果
     // self.topSelectVcView.closeAnimation=YES;
     //隐藏底部滑块
-//    self.topSelectVcView.viewUnder.hidden=YES;
+    //self.topSelectVcView.viewUnder.hidden=YES;
     
     
     //单个设置(可选) ：通过topSelectVcView找到对应的单个顶部button，从左到右如,topViewFirstbtn，topViewSecondbtn,topViewThirdbtn,以此类推;
@@ -83,8 +85,8 @@
 -(void)setupSingleButton
 {
     //  优先级最高
-    self.topSelectVcView.topViewFirstbtn.labName.text=@"标题一";
-    self.topSelectVcView.topViewSecondbtn.labName.text=@"标题二";
+    self.topSelectVcView.topViewFirstbtn.labName.text=@"我是标题";
+    self.topSelectVcView.topViewSecondbtn.labName.text=@"欢迎";
 }
 
 #pragma mark - ZWTopSelectVcViewDelegate
@@ -94,19 +96,16 @@
 {
 
         NSMutableArray *controllerMutableArr=[NSMutableArray array];
-        
-        OneTableViewController *one= [[OneTableViewController alloc]init];
-        one.title=@"欢迎";
-        [controllerMutableArr addObject:one];
-        
-        TwoTableViewController *one1= [[TwoTableViewController alloc]init];
-        one1.title=@"欢迎";
-        [controllerMutableArr addObject:one1];
-        
-        //或者
+    
+        [controllerMutableArr addObject:[[OneTableViewController alloc]init]];
+        [controllerMutableArr addObject:[[TwoTableViewController alloc]init]];
         [controllerMutableArr addObject:[[ThreeTableViewController alloc]init]];
-        [controllerMutableArr addObject:[[FourViewController alloc]init]];
-        
+
+        //或者
+        FourViewController *mine= [[FourViewController alloc]init];
+        mine.title=@"关于白白";
+        [controllerMutableArr addObject:mine];
+    
         return controllerMutableArr;
 
 }
@@ -122,56 +121,8 @@
     
 
     // 优先级最低
-    totalTopBtns.labName.text=@"欢迎";
+    totalTopBtns.labName.text=@"使用";
     
 
 }
-//
-//顶部topview高度
-//-(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return 60;
-//}
-///顶部topview宽度
-//-(CGFloat)topViewWidthInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return 260;
-//}
-/////顶部topview X
-//-(CGFloat)topViewXInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return  (self.view.frame.size.width-260)/2;
-//}
-//
-/////顶部topview Y
-//-(CGFloat)topViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return  0;
-//}
-//
-/////子控制器childVcViewY
-//-(CGFloat)childVcViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return 100;
-//}
-/////子控制器childVcViewX
-//-(CGFloat)childVcViewXInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return  (self.view.frame.size.width-260)/2;
-//}
-/////子控制器childVcView高度
-//-(CGFloat)childVcViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return 200;
-//}
-///////子控制器childVcView宽度
-//-(CGFloat)childVcViewWidthInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//    return 260;
-//}
-#pragma mark - ZWTopSelectButtonDelegate
-//-(CGFloat)topSelectBtnHeightInZWTopSelectButtonDelegate:(ZWTopSelectButton *)topSelectButton
-//{
-//    return 60;
-//}
 @end

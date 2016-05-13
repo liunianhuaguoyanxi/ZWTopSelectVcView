@@ -41,7 +41,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     // Return the number of rows in the section.
-    return 8;
+    return 20;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
@@ -54,7 +54,8 @@
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:I4D];
     }
-    cell.textLabel.text=@"测试";
+    cell.textLabel.text=@"欢迎使用，框架可通过代理导入多个控制器";
+    cell.textLabel.font=[UIFont systemFontOfSize:14];
     return cell;
 }
 

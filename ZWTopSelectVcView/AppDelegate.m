@@ -10,7 +10,7 @@
 
 #import "ExampleViewController.h"
 #import "FristNavigationController.h"
-
+#import "BaseTabBarController.h"
 @interface AppDelegate ()
 
 @end
@@ -21,9 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window=[[UIWindow alloc]init];
     self.window.frame=[UIScreen mainScreen].bounds;
-    ExampleViewController *vc=[[ExampleViewController alloc]init];
-    FristNavigationController *Nav=[[FristNavigationController  alloc]initWithRootViewController:vc];
-    self.window.rootViewController=Nav;
+    BaseTabBarController *tab=[[BaseTabBarController alloc]init];
+    self.window.rootViewController=tab;
     [self.window makeKeyAndVisible];
     return YES;
 }

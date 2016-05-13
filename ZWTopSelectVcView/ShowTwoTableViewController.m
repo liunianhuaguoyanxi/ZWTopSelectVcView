@@ -1,44 +1,45 @@
 //
-//  TwoTableViewController.m
-//  FrameWork
+//  ShowTwoTableViewController.m
+//  ZWTopSelectVcView
 //
-//  Created by liunianhuaguoyanxi on 16/3/16.
-//  Copyright (c) 2016年 yan.jm. All rights reserved.
+//  Created by 流年划过颜夕 on 16/5/13.
+//  Copyright © 2016年 流年划过颜夕. All rights reserved.
 //
 
-#import "TwoTableViewController.h"
+#import "ShowTwoTableViewController.h"
 
-@interface TwoTableViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ShowTwoTableViewController ()
 
 @end
 
-@implementation TwoTableViewController
+@implementation ShowTwoTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        self.title=@"111";
+    
+    self.view.frame=CGRectMake((self.view.frame.size.width-260)/2, 200, 260, 200);
+  
 
-    self.tableView.delegate=self;
-
+    
 }
 
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
 
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
 
-    // Return the number of rows in the section.
     return 20;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSLog(@"2");
+    NSLog(@"努力，奋斗");
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *I4D=@"I4D";
@@ -46,11 +47,15 @@
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:I4D];
     }
-    cell.textLabel.text=@"支持顶部菜单栏和子控制器尺寸自定义";
-    cell.textLabel.font=[UIFont systemFontOfSize:14];
+    cell.textLabel.text=@"喜欢我就star我吧";
+    cell.textLabel.textAlignment=NSTextAlignmentCenter;
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
 
 
 @end

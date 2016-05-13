@@ -54,7 +54,8 @@
  if (!cell) {
  cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:I4D];
  }
- cell.textLabel.text=@"欢迎";
+ cell.textLabel.text=@"支持左右手势滑动切换，16种场景动画切换";
+        cell.textLabel.font=[UIFont systemFontOfSize:14];
  return cell;
 }
 
