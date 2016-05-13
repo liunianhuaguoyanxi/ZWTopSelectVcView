@@ -19,7 +19,7 @@
     self.view.backgroundColor=[UIColor brownColor];
     UILabel *label=[[UILabel alloc]init];
     label.text=@"viewcontroller";
-    label.frame=CGRectMake(100, 100, 200, 100);
+    label.frame=CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width, self.view.frame.size.height/3);
     [self.view addSubview:label];
 
     

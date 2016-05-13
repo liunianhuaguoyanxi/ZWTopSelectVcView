@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//        NSLog(@"%@",NSStringFromCGRect(self.view.frame));
     self.tableView.delegate=self;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

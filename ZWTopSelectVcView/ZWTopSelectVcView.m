@@ -116,7 +116,7 @@ typedef enum{
 -(CGFloat)setupChildVcViewWidth
 {
     if ([self.delegate respondsToSelector:@selector(childVcViewWidthInZWTopSelectVcView:)]) {
-        return  [self.delegate childVcViewHeightInZWTopSelectVcView:self];
+        return  [self.delegate childVcViewWidthInZWTopSelectVcView:self];
     }else{
         return self.frame.size.width;}
 }
@@ -198,6 +198,7 @@ typedef enum{
     [self addSubview:contentVC.view];
     self.contentVC=contentVC;
     self.contentVC.view.frame=CGRectMake(0, 0,self.frame.size.width, self.frame.size.height);
+    self.contentVC.view.backgroundColor=[UIColor redColor];
 }
 -(void)setupContentView
 {
@@ -213,16 +214,15 @@ typedef enum{
     self.topViewX=[self setupTopViewX];
     self.topViewY=[self setupTopViewY];
     
-    self.childVcViewHeight=[self setupChildVcViewHeight];
-    self.childVcViewWidth= [self setupChildVcViewHeight];
-    self.childVcViewX=[self setupChildVcViewX];
-    self.childVcViewY=[self setupChildVcViewY];
+
     
     
     UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(_topViewX, _topViewY, _topViewWidth, _topViewHeight)];
     viewTop.backgroundColor=[UIColor whiteColor];
     [self addSubview:viewTop];
     self.viewTop=viewTop;
+    
+
 }
 -(void)setupEachBtnContent
 {
@@ -328,9 +328,15 @@ typedef enum{
 -(void)setupContentViewContent
 {
     
-     UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(_childVcViewX,_childVcViewY, _childVcViewWidth,_childVcViewHeight)];
+    self.childVcViewHeight=[self setupChildVcViewHeight];
+    self.childVcViewWidth= [self setupChildVcViewWidth];
+    self.childVcViewX=[self setupChildVcViewX];
+    self.childVcViewY=[self setupChildVcViewY];
+
+     UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(self.childVcViewX,self.childVcViewY, self.childVcViewWidth,_childVcViewHeight)];
     [self.contentVC.view addSubview:animationChangeView];
     self.animationChangeView =animationChangeView;
+    animationChangeView.backgroundColor=[UIColor redColor];
     
 
     
@@ -340,6 +346,7 @@ typedef enum{
     }else
     {
         self.showVC=self.contentVC.childViewControllers[0];
+        self.contentVC.childViewControllers[0].view.frame=self.animationChangeView.bounds;
         self.showVC.view.frame=self.animationChangeView.bounds;
         //self.showVC.view.backgroundColor=[UIColor clearColor];
         [self.animationChangeView addSubview:self.showVC.view];
@@ -522,6 +529,7 @@ typedef enum{
             [self setupShowVcRecognizer];
             
             [self setupbtnSelectIndex:self.btnIndex];
+            [self setupActionState:self.isCloseAnimation];
             // NSLog(@"%d --left",self.btnIndex);
         }
     }
@@ -547,6 +555,7 @@ typedef enum{
             [self setupShowVcRecognizer];
             
             [self setupbtnSelectIndex:self.btnIndex];
+            [self setupActionState:self.isCloseAnimation];
             //  NSLog(@"%d --rigth",self.btnIndex);
         }
     }
@@ -576,7 +585,7 @@ typedef enum{
         if (!self.animationType) {
             self.animationType=Push;
         }
-;
+
         switch (self.animationType) {
             case Fade:
                 [self transitionWithType:kCATransitionFade  ForView:self.animationChangeView];
@@ -671,7 +680,7 @@ typedef enum{
     
     //设置运动速度
     animation.timingFunction = UIViewAnimationOptionCurveEaseInOut;
-    NSLog(@"%@ +++",view.layer);
+
     
     [view.layer addAnimation:animation forKey:@"animation"];
 }
