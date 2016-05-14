@@ -514,7 +514,10 @@ typedef enum{
     
     if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
         self.btnIndex--;
-        // NSLog(@"%d --left f",self.btnIndex);
+        self.newindex--;
+        if (self.newindex<0) {
+            self.newindex=0;
+        }
         if (self.btnIndex<0)
         {
             self.btnIndex=0;
@@ -542,7 +545,10 @@ typedef enum{
     if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
         
         self.btnIndex++;
-        
+        self.newindex++;
+        if (self.newindex>self.contentVC.childViewControllers.count-1) {
+            self.newindex=(int)self.contentVC.childViewControllers.count-1;
+        }
         if (self.btnIndex>self.contentVC.childViewControllers.count-1) {
             self.btnIndex=(int)self.contentVC.childViewControllers.count-1;
         }else{
