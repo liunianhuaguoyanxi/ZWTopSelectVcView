@@ -1,5 +1,5 @@
 # ZWTopSelectVcView
-##it's a easy way to add your all kinds of childControllers into superViewController,then you can switch your childViewController by Clicking on the btn which is automatically building in the topview.
+##It's an so easy way to add your all kinds of childControllers into superViewController,then you can switch your childViewController by Clicking on the topButton which is automatically building in the topView.
 ##快速导入多个控制器，通过顶部选择菜单切换控制器，实现一个页面多个控制器切换处理.
 # How to use：
 ## Import the header file（设置头文件）
@@ -29,13 +29,13 @@
    }
 ####Show What it is    
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/1.gif)
-####Show custom size 
+####Show one of the custom sizes 
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/2.gif)
 ####Show one controller can have multiple ZWTopSelectVcView
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/3.gif)
-####Show some of the effects 
+####Show some of the effects about switching 
 
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/水波.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/淡入淡出.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻转.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/覆盖.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻页.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/push.gif)
 
-####具体设置详情在demo中
-####如果你有任何疑问，欢迎随时发邮件到menglanfenghen@163.com
+####The specific content about it is in the demo(具体设置详情在demo中)
+####If you have any questions, please send the email to liunianhuaguoyanxi@Gmail.com or menglanfenghen@163.com 
