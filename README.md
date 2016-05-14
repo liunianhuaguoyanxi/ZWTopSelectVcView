@@ -1,5 +1,6 @@
 # ZWTopSelectVcView
-##快速导入多个控制器，通过顶部选择菜单切换控制器，实现一个页面多个控制器切换处理
+##it's a easy way to add your all kinds of childControllers into superViewController,then you can switch your childViewController by Clicking on the btn which is automatically building in the topview.
+##快速导入多个控制器，通过顶部选择菜单切换控制器，实现一个页面多个控制器切换处理.
 # How to use：
 ## Import the header file（设置头文件）
     #import "ZWTopSelectButton.h"
