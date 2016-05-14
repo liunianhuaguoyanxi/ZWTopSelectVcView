@@ -38,4 +38,4 @@
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/水波.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/淡入淡出.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻转.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/覆盖.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻页.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/push.gif)
 
 ####The specific content about it is in the demo(具体设置详情在demo中)
-####If you have any questions, please send the email to liunianhuaguoyanxi@Gmail.com or menglanfenghen@163.com 
+####If you have any questions, please send the email to liunianhuaguoyanxi@Gmail.com or liunianhuaguoyanxi@163.com 
