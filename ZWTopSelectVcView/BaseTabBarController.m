@@ -45,7 +45,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 {
     childVc.tabBarItem.title=title;
     childVc.tabBarItem.image=[UIImage imageNamed:image];
-    childVc.tabBarItem.selectedImage=[[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     NSMutableDictionary *textAttrs=[NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName]=[UIColor blackColor];
     NSMutableDictionary *selectTextAttrs=[NSMutableDictionary dictionary];
