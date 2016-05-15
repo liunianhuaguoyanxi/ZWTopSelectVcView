@@ -1,5 +1,5 @@
 # ZWTopSelectVcView
-##It's an so easy way to add your all kinds of childControllers into superViewController, then you can switch your childViewController by Clicking on the topButton which is automatically building in the topView.
+##It's an so easy way to add your all kinds of childControllers into superViewController, then you can slide around or just click on the topButton which is automatically building in the topView to switch your childViewController.
 ##快速导入多个控制器，通过顶部选择菜单切换控制器，实现一个页面多个控制器切换处理.
 # How to use：
 ## Import the header file（设置头文件）
