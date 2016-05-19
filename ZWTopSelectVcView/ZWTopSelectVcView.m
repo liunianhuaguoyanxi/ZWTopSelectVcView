@@ -18,32 +18,33 @@ static const CGFloat originalTopViewHeight=50;
 static const CGFloat originalChildVcViewHeight=50;
 
 @interface ZWTopSelectVcView();
-@property (nonatomic, assign) CGFloat      topViewHeight;
-@property (nonatomic, assign) CGFloat      topViewWidth;
-@property (nonatomic, assign) CGFloat      topViewX;
-@property (nonatomic, assign) CGFloat      topViewY;
+@property (nonatomic, assign) CGFloat                  topViewHeight;
+@property (nonatomic, assign) CGFloat                  topViewWidth;
+@property (nonatomic, assign) CGFloat                  topViewX;
+@property (nonatomic, assign) CGFloat                  topViewY;
 
-@property (nonatomic, assign) CGFloat      childVcViewHeight;
-@property (nonatomic, assign) CGFloat      childVcViewWidth;
-@property (nonatomic, assign) CGFloat      childVcViewX;
-@property (nonatomic, assign) CGFloat      childVcViewY;
+@property (nonatomic, assign) CGFloat                  childVcViewHeight;
+@property (nonatomic, assign) CGFloat                  childVcViewWidth;
+@property (nonatomic, assign) CGFloat                  childVcViewX;
+@property (nonatomic, assign) CGFloat                  childVcViewY;
+
 
 ///装子控制器容器
-@property (nonatomic ,weak  ) UIView           *animationChangeView;
-@property (nonatomic ,weak  ) UIViewController *showVC;
-@property (nonatomic ,strong) UIViewController *contentVC;
-@property (nonatomic, assign) int              index;
-@property (nonatomic, assign) NSInteger        newindex;
-@property (nonatomic, assign) NSInteger        oldindex;
-@property (nonatomic, assign) int             titleIndex;
-@property (nonatomic, assign) int             titleCompareIndex;
-@property (nonatomic, strong) NSMutableArray   *titleIndexArr;
-@property (nonatomic, strong) NSMutableArray   *titleArr;
-@property (nonatomic, assign) int              btnIndex;
+@property (nonatomic ,weak  ) UIView                   *animationChangeView;
+@property (nonatomic ,weak  ) UIViewController         *showVC;
+@property (nonatomic ,strong) UIViewController         *contentVC;
+@property (nonatomic, assign) int                      index;
+@property (nonatomic, assign) NSInteger                newindex;
+@property (nonatomic, assign) NSInteger                oldindex;
+@property (nonatomic, assign) int                      titleIndex;
+@property (nonatomic, assign) int                      titleCompareIndex;
+@property (nonatomic, strong) NSMutableArray           *titleIndexArr;
+@property (nonatomic, strong) NSMutableArray           *titleArr;
+@property (nonatomic, assign) int                      btnIndex;
 ///顶部容器
-@property (nonatomic, weak  ) UIView *viewTop;
-@property (nonatomic, strong)  UISwipeGestureRecognizer *recognizerLeft;
-@property (nonatomic, strong)  UISwipeGestureRecognizer *recognizerRight;
+@property (nonatomic, weak  ) UIView                   *viewTop;
+@property (nonatomic, strong) UISwipeGestureRecognizer *recognizerLeft;
+@property (nonatomic, strong) UISwipeGestureRecognizer *recognizerRight;
 
 @end
 typedef enum{
@@ -198,6 +199,7 @@ typedef enum{
     [self addSubview:contentVC.view];
     self.contentVC=contentVC;
     self.contentVC.view.frame=CGRectMake(0, 0,self.frame.size.width, self.frame.size.height);
+
     //self.contentVC.view.backgroundColor=[UIColor redColor];
 }
 -(void)setupContentView
@@ -220,8 +222,9 @@ typedef enum{
     UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(_topViewX, _topViewY, _topViewWidth, _topViewHeight)];
     viewTop.backgroundColor=[UIColor whiteColor];
     [self addSubview:viewTop];
+    viewTop.layer.cornerRadius=self.topViewCornerRadius?self.topViewCornerRadius:0;
     self.viewTop=viewTop;
-    
+
 
 }
 -(void)setupEachBtnContent

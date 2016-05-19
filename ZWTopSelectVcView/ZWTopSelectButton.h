@@ -11,8 +11,8 @@
 @protocol ZWTopSelectButtonDelegate <NSObject>
 
 @optional
-///高度设置
--(CGFloat)topSelectBtnHeightInZWTopSelectButtonDelegate:(ZWTopSelectButton *)topSelectButton;
+///高度间隔线设置
+-(CGFloat)topSelectBtnSpacingBarHeightInZWTopSelectButtonDelegate:(ZWTopSelectButton *)topSelectButton;
 
 @end
 @interface ZWTopSelectButton : UIButton

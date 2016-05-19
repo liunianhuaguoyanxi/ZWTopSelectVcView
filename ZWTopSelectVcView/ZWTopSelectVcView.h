@@ -104,15 +104,16 @@ typedef enum : NSUInteger {
 } AnimationType;
 
 ///是否关闭动画
-@property (nonatomic, assign) BOOL   isCloseAnimation;
+@property (nonatomic, assign) BOOL          isCloseAnimation;
 ///底部滑块
-@property (nonatomic ,strong) UIView *viewUnder;
-
+@property (nonatomic ,strong) UIView        *viewUnder;
+///设置topView圆角
+@property (nonatomic, assign) CGFloat       topViewCornerRadius;
 ///设置动画时间
-@property (nonatomic, assign) float  speedTime;
+@property (nonatomic, assign) float         speedTime;
 ///动画效果
-@property (nonatomic, assign) AnimationType  animationType;
+@property (nonatomic, assign) AnimationType animationType;
 ///关闭左右手势滑动功能
-@property (nonatomic, assign) BOOL isCloseSwipeGesture;
+@property (nonatomic, assign) BOOL          isCloseSwipeGesture;
 @end
 

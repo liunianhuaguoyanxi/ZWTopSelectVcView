@@ -49,11 +49,11 @@
     
     self.topSelectVcView1.topViewFirstbtn.labName.text=@"1.设置方法";
     self.topSelectVcView1.topViewSecondbtn.labName.text=@"2.框架优点";
-    
+
     
 // 第二个ZWTopSelectVcView
     ZWTopSelectVcView *topSelectVcView2=[[ZWTopSelectVcView alloc]init];
-    
+
     topSelectVcView2.frame=CGRectMake(self.view.frame.size.width/2+10, 0, self.view.frame.size.width/2-10, self.view.frame.size.height);
     [self.view addSubview:topSelectVcView2];
     self.topSelectVcView2=topSelectVcView2;
