@@ -14,9 +14,9 @@
     self.topSelectVcView.delegate=self;
 ### 3.Start drawing the UI （开始绘制UI）
     [self.topSelectVcView setupZWTopSelectVcViewUI];
-##To implement proxy（Have to do）（一步导入你的各种控制器）
-   -(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-   {
+## To implement proxy（Have to do）（一步导入你的各种控制器）
+    -(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+    {
    
     NSMutableArray *controllerMutableArr=[NSMutableArray array];
     
@@ -26,16 +26,16 @@
     [controllerMutableArr addObject:[[FourViewController alloc]init]];
     
     return controllerMutableArr;
-   }
-####Show What it is    
+    }
+#### Show What it is    
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/1.gif)
-####Show one of the custom sizes 
+#### Show one of the custom sizes 
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/2.gif)
-####Show one controller can have multiple ZWTopSelectVcView
+#### Show one controller can have multiple ZWTopSelectVcView
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/3.gif)
-####Show some of the effects about switching 
+#### Show some of the effects about switching 
 
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/水波.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/淡入淡出.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻转.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/覆盖.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻页.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/push.gif)
 
-####The specific content about it is in the demo(具体设置详情在demo中)
-####If you have any questions, please send the email to liunianhuaguoyanxi@Gmail.com or liunianhuaguoyanxi@163.com 
+#### The specific content about it is in the demo(具体设置详情在demo中)
+#### If you have any questions, please send the email to liunianhuaguoyanxi@Gmail.com or liunianhuaguoyanxi@163.com 
