@@ -27,13 +27,13 @@
     
     return controllerMutableArr;
     }
-#### Show What it is    
+### Show What it is    
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/1.gif)
-#### Show one of the custom sizes 
+### Show one of the custom sizes 
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/2.gif)
-#### Show one controller can have multiple ZWTopSelectVcView
+### Show one controller can have multiple ZWTopSelectVcView
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/3.gif)
-#### Show some of the effects about switching 
+### Show some of the effects about switching 
 
 ![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/水波.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/淡入淡出.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻转.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/覆盖.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/翻页.gif)![image](https://github.com/liunianhuaguoyanxi/ZWTopSelectVcView/raw/master/演示/push.gif)
 
