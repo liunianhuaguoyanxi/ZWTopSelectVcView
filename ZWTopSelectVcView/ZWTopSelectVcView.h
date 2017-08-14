@@ -53,6 +53,10 @@
 ///子控制器Y设置
 -(CGFloat)childVcViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
+
+///初始化展示第几个控制器（默认第一个）
+-(NSInteger)showChildViewVcIndexInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
 @end
 
 

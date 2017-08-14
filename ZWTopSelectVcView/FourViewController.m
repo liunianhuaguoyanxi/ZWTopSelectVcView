@@ -59,8 +59,11 @@
     UIWebView *webView=[[UIWebView alloc]initWithFrame:CGRectMake(0,0,kScreenWidth , kScreenHeight)];
         self.view.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view addSubview:webView];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://github.com/liunianhuaguoyanxi"]]];
 
+        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://github.com/liunianhuaguoyanxi"]]];
+
+
+    
 
 }
 

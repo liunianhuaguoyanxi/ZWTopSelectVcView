@@ -39,6 +39,7 @@
     //第二步：设置ZWTopSelectVcView的代理
     self.topSelectVcView.delegate=self;
     
+
     
     //第三步： 开始ZWTopSelectVcViewUI绘制,必须实现！
     [self.topSelectVcView setupZWTopSelectVcViewUI];
@@ -125,4 +126,9 @@
     
 
 }
+//（可选）显示第几个子控制器，默认为第一个
+//-(NSInteger)showChildViewVcIndexInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return 2;
+//}
 @end

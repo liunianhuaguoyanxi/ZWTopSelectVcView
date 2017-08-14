@@ -7,7 +7,7 @@
 //
 
 #import "OneTableViewController.h"
-
+#import "FristNavigationController.h"
 @interface OneTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -46,6 +46,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     NSLog(@"1");
+
+  FristNavigationController *nav=  [UIApplication sharedApplication].keyWindow.rootViewController.childViewControllers[0];
+    [nav pushViewController:[[OneTableViewController alloc]init] animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

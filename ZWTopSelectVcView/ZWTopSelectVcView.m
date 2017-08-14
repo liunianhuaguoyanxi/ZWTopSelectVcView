@@ -46,6 +46,7 @@ static const CGFloat originalChildVcViewHeight=50;
 @property (nonatomic, strong) UISwipeGestureRecognizer *recognizerLeft;
 @property (nonatomic, strong) UISwipeGestureRecognizer *recognizerRight;
 
+@property (nonatomic, assign) NSInteger                showChildViewVcIndex;
 @end
 typedef enum{
     ZWTopSelectButtonTypeHeadFirst,
@@ -72,8 +73,9 @@ typedef enum{
     
     [self setupChildViewController];
     
-
     
+
+
 }
 
 -(CGFloat)setupTopViewHeight
@@ -137,7 +139,15 @@ typedef enum{
     }else{
         return  originalChildVcViewHeight;}
 }
-
+-(NSInteger)setupChildViewVcIndex
+{
+    if ([self.delegate respondsToSelector:@selector(showChildViewVcIndexInZWTopSelectVcView:)]) {
+        return [self.delegate showChildViewVcIndexInZWTopSelectVcView:self];
+    }else
+    {
+        return  0;
+    }
+}
 -(NSMutableArray *)titleIndexArr
 {
     if (!_titleIndexArr) {
@@ -171,6 +181,9 @@ typedef enum{
     
     self.index=(int)self.contentVC.childViewControllers.count;
     [self setupContentView];
+    
+
+
 }
 
 /**
@@ -335,6 +348,12 @@ typedef enum{
     self.childVcViewWidth= [self setupChildVcViewWidth];
     self.childVcViewX=[self setupChildVcViewX];
     self.childVcViewY=[self setupChildVcViewY];
+    self.showChildViewVcIndex=[self setupChildViewVcIndex]-1;
+    
+    if ([self setupChildViewVcIndex]) {
+        [self setupSelcetedShowViewControllerWithIndex:self.showChildViewVcIndex];
+    }
+
 
      UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(self.childVcViewX,self.childVcViewY, self.childVcViewWidth,_childVcViewHeight)];
     [self.contentVC.view addSubview:animationChangeView];
@@ -385,76 +404,82 @@ typedef enum{
     }
     [self.viewTop addSubview:btn];
 }
--(void)underViewMoveTo:(int)index{
-    [UIView animateWithDuration:0.7 animations:^{
-        self.viewUnder.frame=CGRectMake(index *((_topViewWidth)/self.index), (_topViewHeight)-2, (_topViewWidth)/self.index, 2);
-    }];
+-(void)underViewMoveTo:(int)index withAnimation:(BOOL)isAnimation{
+    if (isAnimation) {
+        [UIView animateWithDuration:0.7 animations:^{
+            self.viewUnder.frame=CGRectMake(index *((_topViewWidth)/self.index), (_topViewHeight)-2, (_topViewWidth)/self.index, 2);
+        }];
+    }else
+    {
+            self.viewUnder.frame=CGRectMake(index *((_topViewWidth)/self.index), (_topViewHeight)-2, (_topViewWidth)/self.index, 2);
+    }
+
 }
 
--(void)setupbtnSelectIndex:(int)btnSelectIndex
+-(void)setupbtnSelectIndex:(int)btnSelectIndex withAnimation:(BOOL)isAnimation
 {
     switch (btnSelectIndex) {
         case ZWTopSelectButtonTypeHeadFirst:
         {
             [self setupBtnState];
             [self.topViewFirstbtn setState:YES];
-            [self underViewMoveTo:0];
+            [self underViewMoveTo:0 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadSecond:
         {
             [self setupBtnState];
             [self.topViewSecondbtn setState:YES];
-            [self underViewMoveTo:1];
+            [self underViewMoveTo:1 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadThird:
         {
             [self setupBtnState];
             [self.topViewThirdbtn setState:YES];
-            [self underViewMoveTo:2];
+            [self underViewMoveTo:2 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadFourth:
         {
             [self setupBtnState];
             [self.topViewFourthbtn setState:YES];
-            [self underViewMoveTo:3];
+            [self underViewMoveTo:3 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadFifth:
         {
             [self setupBtnState];
             [self.topViewFifthbtn setState:YES];
-            [self underViewMoveTo:4];
+            [self underViewMoveTo:4 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadSixth:
         {
             [self setupBtnState];
             [self.topViewSixthbtn setState:YES];
-            [self underViewMoveTo:5];
+            [self underViewMoveTo:5 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadSeventh:
         {
             [self setupBtnState];
             [self.topViewSeventhbtn setState:YES];
-            [self underViewMoveTo:6];
+            [self underViewMoveTo:6 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadEighth:
         {
             [self setupBtnState];
             [self.topViewEighthbtn setState:YES];
-            [self underViewMoveTo:7];
+            [self underViewMoveTo:7 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadNinth:
         {
             [self setupBtnState];
             [self.topViewNinthbtn setState:YES];
-            [self underViewMoveTo:8];
+            [self underViewMoveTo:8 withAnimation:isAnimation];
         }
             break;
             
@@ -483,9 +508,38 @@ typedef enum{
     
     [self setupActionState:self.isCloseAnimation];
     
-    [self setupbtnSelectIndex:(int)btn.tag];
+    [self setupbtnSelectIndex:(int)btn.tag withAnimation:YES];
 }
+-(void)setupSelcetedShowViewControllerWithIndex:(NSInteger)index
+{
+    if (index>=0&&index<self.contentVC.childViewControllers.count) {
+        for (ZWTopSelectButton *selectBtn in self.viewTop.subviews) {
+            if (selectBtn.tag==index) {
+                [self setupSelcetedShowClickTypes:selectBtn];
+                
+            }
+        }
+    }
 
+}
+-(void)setupSelcetedShowClickTypes:(ZWTopSelectButton *)btn
+{
+    
+    self.btnIndex=(int)btn.tag;
+    [self.showVC.view removeFromSuperview];
+    self.newindex=[btn.superview.subviews indexOfObject:btn];
+    self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
+    
+    self.showVC=self.contentVC.childViewControllers[self.newindex];
+    
+    self.showVC.view.frame=self.animationChangeView.bounds;
+    [self.animationChangeView addSubview:self.showVC.view];
+    [self setupShowVcRecognizer];
+    
+    
+    
+    [self setupbtnSelectIndex:(int)btn.tag withAnimation:NO];
+}
 //手势初始化
 -(void)setupShowVcRecognizer
 {
@@ -534,7 +588,7 @@ typedef enum{
             [self.animationChangeView addSubview:self.showVC.view];
             [self setupShowVcRecognizer];
             
-            [self setupbtnSelectIndex:self.btnIndex];
+            [self setupbtnSelectIndex:self.btnIndex withAnimation:YES];
             [self setupActionState:self.isCloseAnimation];
             // NSLog(@"%d --left",self.btnIndex);
         }
@@ -563,7 +617,7 @@ typedef enum{
             [self.animationChangeView addSubview:self.showVC.view];
             [self setupShowVcRecognizer];
             
-            [self setupbtnSelectIndex:self.btnIndex];
+            [self setupbtnSelectIndex:self.btnIndex withAnimation:YES];
             [self setupActionState:self.isCloseAnimation];
             //  NSLog(@"%d --rigth",self.btnIndex);
         }
