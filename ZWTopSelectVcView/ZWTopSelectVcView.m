@@ -78,6 +78,13 @@ typedef enum{
 
 }
 
+- (UIColor *)setupTopViewBackGourndColor
+{
+    if ([self.delegate respondsToSelector:@selector(topViewBackGroundColorInZWTopSelectVcView:)]) {
+        return  [self.delegate topViewBackGroundColorInZWTopSelectVcView:self];
+    }else{
+        return [UIColor whiteColor];}
+}
 -(CGFloat)setupTopViewHeight
 {
     if ([self.delegate respondsToSelector:@selector(topViewHeightInZWTopSelectVcView:)]) {
@@ -233,7 +240,7 @@ typedef enum{
     
     
     UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(_topViewX, _topViewY, _topViewWidth, _topViewHeight)];
-    viewTop.backgroundColor=[UIColor whiteColor];
+    viewTop.backgroundColor=[self setupTopViewBackGourndColor];
     [self addSubview:viewTop];
     viewTop.layer.cornerRadius=self.topViewCornerRadius?self.topViewCornerRadius:0;
     self.viewTop=viewTop;

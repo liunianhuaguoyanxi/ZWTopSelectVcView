@@ -126,9 +126,14 @@
     
 
 }
-//（可选）显示第几个子控制器，默认为第一个
+////（可选）显示第几个子控制器，默认为第一个
 //-(NSInteger)showChildViewVcIndexInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 //{
-//    return 2;
+//    return 3;
+//}
+////（可选）显示顶部选择栏背景色，默认为第一个
+//-(UIColor *)topViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//    return [UIColor orangeColor];
 //}
 @end

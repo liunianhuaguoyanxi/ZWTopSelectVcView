@@ -34,6 +34,10 @@
  
  */
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
+//
+///顶部标题背景设置
+-(UIColor *)topViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 ///顶部高度设置
 -(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 ///顶部宽度设置
