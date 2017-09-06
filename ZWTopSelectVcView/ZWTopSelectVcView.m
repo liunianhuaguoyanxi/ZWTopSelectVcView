@@ -404,7 +404,7 @@ typedef enum{
         }
         
     }
-    
+    [self setupBtnState]; 
     [btn addTarget:self action:@selector(btnHeadClickType:) forControlEvents:UIControlEventTouchUpInside];
     if (self.contentVC.childViewControllers.count-1==index) {
         btn.viewLine.hidden=YES;
