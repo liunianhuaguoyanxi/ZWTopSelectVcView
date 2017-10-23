@@ -192,7 +192,51 @@ typedef enum{
 
 
 }
+/**
+ *  重新加载数组刷新ZWTopSelectVcView
+ *
+ *
+ *  @param 重新加载数组刷新ZWTopSelectVcView
+ *
+ *  @return 返回封装您的控制器的可变数组
+ */
+-(void)reloadWithChildControllerMutableArr:(NSMutableArray *)arr
+{
+    if (arr.count>0) {
+        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self setupContentVC];
+        self.titleCompareIndex=0;
+        self.titleIndex=0;
+        self.oldindex=0;
+        self.newindex=0;
+        self.btnIndex=0;
+        if (self.titleIndexArr.count>0) {
+            [self.titleIndexArr removeAllObjects];
+        }
+        if (self.titleArr.count>0) {
+            [self.titleArr removeAllObjects];
+        }
+        if (self.contentVC.childViewControllers.count>0) {
+            for (UIViewController *vc in self.contentVC.childViewControllers) {
+                [vc removeFromParentViewController];
+            }
+        }
 
+        for (UIViewController *vc in arr) {
+            [self.contentVC addChildViewController:vc];
+            if (vc.title) {
+                NSString *eachTitle=vc.title;
+                [self.titleArr addObject:eachTitle];
+                [self.titleIndexArr addObject:[NSNumber numberWithInt:(self.titleIndex)]];
+            }
+            self.titleIndex++;
+        }
+        
+        self.index=(int)self.contentVC.childViewControllers.count;
+        [self setupContentView];
+    }
+
+}
 /**
  *  顶部选择按钮属性统一设置
  *

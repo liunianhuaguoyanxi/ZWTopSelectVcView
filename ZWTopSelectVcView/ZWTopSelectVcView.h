@@ -123,5 +123,17 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) AnimationType animationType;
 ///关闭左右手势滑动功能
 @property (nonatomic, assign) BOOL          isCloseSwipeGesture;
+
+
+/**
+ *  重新加载数组刷新ZWTopSelectVcView
+ *
+ *
+ *  @param 重新加载数组刷新ZWTopSelectVcView
+ *
+ *  @return 返回封装您的控制器的可变数组
+ */
+-(void)reloadWithChildControllerMutableArr:(NSMutableArray *)arr;
+
 @end
 

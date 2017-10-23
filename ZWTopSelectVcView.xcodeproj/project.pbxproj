@@ -39,6 +39,7 @@
 		8F620B1B1CDCA8F700D28A94 /* ZWTopSelectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F620B181CDCA8F700D28A94 /* ZWTopSelectButton.m */; };
 		8F620B1C1CDCA8F700D28A94 /* ZWTopSelectVcView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F620B1A1CDCA8F700D28A94 /* ZWTopSelectVcView.m */; };
 		8F620B201CDCA92F00D28A94 /* ExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F620B1F1CDCA92F00D28A94 /* ExampleViewController.m */; };
+		8F9E6FFF1F9D956D00DC3916 /* ShowThreeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E6FFE1F9D956D00DC3916 /* ShowThreeTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,8 @@
 		8F620B1A1CDCA8F700D28A94 /* ZWTopSelectVcView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWTopSelectVcView.m; sourceTree = "<group>"; };
 		8F620B1E1CDCA92F00D28A94 /* ExampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleViewController.h; sourceTree = "<group>"; };
 		8F620B1F1CDCA92F00D28A94 /* ExampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleViewController.m; sourceTree = "<group>"; };
+		8F9E6FFD1F9D956D00DC3916 /* ShowThreeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowThreeTableViewController.h; sourceTree = "<group>"; };
+		8F9E6FFE1F9D956D00DC3916 /* ShowThreeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowThreeTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +188,8 @@
 				8F596E671CE5DEFA008EEB2F /* ShowOneViewController.m */,
 				8F596E691CE5DF20008EEB2F /* ShowTwoTableViewController.h */,
 				8F596E6A1CE5DF20008EEB2F /* ShowTwoTableViewController.m */,
+				8F9E6FFD1F9D956D00DC3916 /* ShowThreeTableViewController.h */,
+				8F9E6FFE1F9D956D00DC3916 /* ShowThreeTableViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F9E6FFF1F9D956D00DC3916 /* ShowThreeTableViewController.m in Sources */,
 				8F620B141CDCA8B100D28A94 /* TwoTableViewController.m in Sources */,
 				8F596E741CE5F317008EEB2F /* SecondThreeViewController.m in Sources */,
 				8F596E651CE5DE95008EEB2F /* FirstTwoViewController.m in Sources */,
