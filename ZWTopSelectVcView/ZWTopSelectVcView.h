@@ -36,8 +36,14 @@
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
 //
+//顶部按钮文字选中背景色设置
+-(UIColor *)topSliderViewSelectedTitleColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcViedew;
+//顶部按钮文字未选中背景色设置
+-(UIColor *)topSliderViewNotSelectedTitleColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcViedew;
+//顶部按钮间隔线背景色设置
+-(UIColor *)topSliderLineSpacingColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcViedew;
 //顶部滑块背景设置
--(UIColor *)topSliderViewViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+-(UIColor *)topSliderViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 //顶部标题背景设置
 -(UIColor *)topViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 ///顶部高度设置

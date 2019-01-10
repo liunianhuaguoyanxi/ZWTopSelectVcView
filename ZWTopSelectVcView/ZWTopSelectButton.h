@@ -16,11 +16,12 @@
 
 @end
 @interface ZWTopSelectButton : UIButton
--(void)setState:(BOOL)state;
+-(void)setState:(BOOL)state withSelectedColor:(UIColor *)selectedColor withNotSelectedColor:(UIColor *)notSelectedColor withViewLineColor:(UIColor *)viewLineColor;
 
 @property (nonatomic ,assign) NSInteger index;
 @property (nonatomic ,strong) UILabel *labName;
 @property (nonatomic ,strong) UIView  *viewLine;
+@property (nonatomic ,strong) UIColor *viewLineColor;
 @property (nonatomic ,strong) UIColor *selectedColor;
 @property (nonatomic ,strong) UIColor *notSelectedColor;
 @property (nonatomic, weak) id<ZWTopSelectButtonDelegate > delegata;

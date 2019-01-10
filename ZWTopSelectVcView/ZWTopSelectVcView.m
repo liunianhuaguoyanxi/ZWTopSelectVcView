@@ -77,10 +77,34 @@ typedef enum{
     
     
 }
+//顶部按钮文字选中背景色设置
+-(UIColor *)setupSliderViewSelectedTitleColor
+{
+    if ([self.dataSource respondsToSelector:@selector(topSliderViewSelectedTitleColorInZWTopSelectVcView:)]) {
+        return  [self.dataSource topSliderViewSelectedTitleColorInZWTopSelectVcView:self];
+    }else{
+        return [UIColor redColor];}
+}
+//顶部按钮文字未选中背景色设置
+-(UIColor *)setupSliderViewNotSelectedTitleColor
+{
+    if ([self.dataSource respondsToSelector:@selector(topSliderViewNotSelectedTitleColorInZWTopSelectVcView:)]) {
+        return  [self.dataSource topSliderViewNotSelectedTitleColorInZWTopSelectVcView:self];
+    }else{
+        return [UIColor grayColor];}
+}
+//顶部按钮间隔线背景色设置
+-(UIColor *)setupSliderLineSpacingColor
+{
+    if ([self.dataSource respondsToSelector:@selector(topSliderLineSpacingColorInZWTopSelectVcView:)]) {
+        return  [self.dataSource topSliderLineSpacingColorInZWTopSelectVcView:self];
+    }else{
+        return [UIColor redColor];}
+}
 - (UIColor *)setupSliderViewBackGourndColor
 {
-    if ([self.dataSource respondsToSelector:@selector(topSliderViewViewBackGroundColorInZWTopSelectVcView:)]) {
-        return  [self.dataSource topSliderViewViewBackGroundColorInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(topSliderViewBackGroundColorInZWTopSelectVcView:)]) {
+        return  [self.dataSource topSliderViewBackGroundColorInZWTopSelectVcView:self];
     }else{
         return [UIColor redColor];}
 }
@@ -472,7 +496,7 @@ typedef enum{
             if (self.showVC.title) {
                 self.topViewFirstbtn.labName.text=self.showVC.title;
             }
-            [self.topViewFirstbtn setState:YES];
+            [self.topViewFirstbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
         }
         
         
@@ -525,63 +549,64 @@ typedef enum{
         case ZWTopSelectButtonTypeHeadFirst:
         {
             [self setupBtnState];
-            [self.topViewFirstbtn setState:YES];
+            [self.topViewFirstbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+            
             [self underViewMoveTo:0 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadSecond:
         {
             [self setupBtnState];
-            [self.topViewSecondbtn setState:YES];
+            [self.topViewSecondbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:1 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadThird:
         {
             [self setupBtnState];
-            [self.topViewThirdbtn setState:YES];
+            [self.topViewThirdbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:2 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadFourth:
         {
             [self setupBtnState];
-            [self.topViewFourthbtn setState:YES];
+            [self.topViewFourthbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:3 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadFifth:
         {
             [self setupBtnState];
-            [self.topViewFifthbtn setState:YES];
+            [self.topViewFifthbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:4 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadSixth:
         {
             [self setupBtnState];
-            [self.topViewSixthbtn setState:YES];
+            [self.topViewSixthbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:5 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadSeventh:
         {
             [self setupBtnState];
-            [self.topViewSeventhbtn setState:YES];
+            [self.topViewSeventhbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:6 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadEighth:
         {
             [self setupBtnState];
-            [self.topViewEighthbtn setState:YES];
+            [self.topViewEighthbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:7 withAnimation:isAnimation];
         }
             break;
         case ZWTopSelectButtonTypeHeadNinth:
         {
             [self setupBtnState];
-            [self.topViewNinthbtn setState:YES];
+            [self.topViewNinthbtn setState:YES withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
             [self underViewMoveTo:8 withAnimation:isAnimation];
         }
             break;
@@ -755,15 +780,15 @@ typedef enum{
 
 -(void)setupBtnState
 {
-    [self.topViewFirstbtn setState:NO];
-    [self.topViewSecondbtn setState:NO];
-    [self.topViewThirdbtn setState:NO];
-    [self.topViewFourthbtn setState:NO];
-    [self.topViewFifthbtn setState:NO];
-    [self.topViewSixthbtn setState:NO];
-    [self.topViewSeventhbtn setState:NO];
-    [self.topViewEighthbtn setState:NO];
-    [self.topViewNinthbtn setState:NO];
+    [self.topViewFirstbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewSecondbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewThirdbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewFourthbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewFifthbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewSixthbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewSeventhbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewEighthbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
+    [self.topViewNinthbtn setState:NO withSelectedColor:[self setupSliderViewSelectedTitleColor] withNotSelectedColor:[self setupSliderViewNotSelectedTitleColor] withViewLineColor:[self setupSliderLineSpacingColor]];
 }
 -(void)setupActionState:(BOOL)state{
     if (state==YES) {

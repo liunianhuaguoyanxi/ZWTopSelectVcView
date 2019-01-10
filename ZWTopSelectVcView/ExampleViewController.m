@@ -18,7 +18,7 @@
  *  基本使用
  */
 
-@interface ExampleViewController ()<ZWTopSelectVcViewDelegate>
+@interface ExampleViewController ()<ZWTopSelectVcViewDataSource,ZWTopSelectVcViewDelegate>
 @property (nonatomic, weak) ZWTopSelectVcView *topSelectVcView;
 
 @end
@@ -38,7 +38,7 @@
     
     //第二步：设置ZWTopSelectVcView的代理
     self.topSelectVcView.delegate=self;
-    
+    self.topSelectVcView.dataSource=self;
 
     
     //第三步： 开始ZWTopSelectVcViewUI绘制,必须实现！

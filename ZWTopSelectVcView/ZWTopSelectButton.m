@@ -59,13 +59,14 @@
     float  topSelectBtnInithalfHeight =topSelectBtnInitHeight/2;
     self.viewLine.frame=CGRectMake(self.frame.size.width-1, self.frame.size.height/2-topSelectBtnInithalfHeight, 1, topSelectBtnInitHeight);
 }
--(void)setState:(BOOL)state{
-    if (state==YES) {
-        self.labName.textColor=self.selectedColor?self.selectedColor:[UIColor redColor];
+-(void)setState:(BOOL)state withSelectedColor:(UIColor *)selectedColor withNotSelectedColor:(UIColor *)notSelectedColor withViewLineColor:(UIColor *)viewLineColor{
+    self.viewLine.backgroundColor = self.viewLineColor?self.viewLineColor:viewLineColor;
+    if(state==YES) {
+        self.labName.textColor=self.selectedColor?self.selectedColor:selectedColor;
         self.userInteractionEnabled=NO;
     }else if(state==NO)
     {
-        self.labName.textColor=self.notSelectedColor?self.notSelectedColor:[UIColor grayColor];
+        self.labName.textColor=self.notSelectedColor?self.notSelectedColor:notSelectedColor;
         self.userInteractionEnabled=YES;
     }
 }

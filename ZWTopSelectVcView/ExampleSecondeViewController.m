@@ -138,10 +138,25 @@
     return controllerMutableArr;
     
 }
-//顶部滑块背景设置
--(UIColor *)topSliderViewViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//顶部按钮间隔线颜色
+-(UIColor *)topSliderLineSpacingColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcViedew
 {
-    return [UIColor redColor];
+    return [UIColor blackColor];
+}
+//顶部按钮文字选中背景色设置
+-(UIColor *)topSliderViewSelectedTitleColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcViedew
+{
+    return [UIColor blackColor];
+}
+//顶部按钮文字未选中背景色设置
+-(UIColor *)topSliderViewNotSelectedTitleColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcViedew
+{
+    return [UIColor lightGrayColor];
+}
+//顶部滑块背景设置
+-(UIColor *)topSliderViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+{
+    return [UIColor blackColor];
 }
 ///顶部topview高度
 -(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
@@ -187,11 +202,11 @@
 }
 
 //（可选）初始化展示第几个控制器（默认第一个，以UIViewController查找，优先级高）
--(UIViewController *)showChildViewVcNameInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-{
-    
-    return selectViewController;
-}
+//-(UIViewController *)showChildViewVcNameInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+//{
+//
+//    return selectViewController;
+//}
 ///初始化展示第几个控制器（默认第一个 index == 0,以index查找，优先级低）
 //-(NSInteger)showChildViewVcIndexInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 //{
