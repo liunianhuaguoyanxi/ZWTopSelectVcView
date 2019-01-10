@@ -10,9 +10,10 @@
     topSelectVcView.frame=self.view.frame;
     [self.view addSubview:topSelectVcView];
     self.topSelectVcView=topSelectVcView;
-### 2.Set the dataSource of ZWTopSelectVcView（设置数据源，必选）
-    self.topSelectVcView.delegate=self;
-####  Set the delegate of ZWTopSelectVcView（设置代理,可选）
+### 2.
+### (1)Set the dataSource of ZWTopSelectVcView（设置数据源，必选）
+    self.topSelectVcView.dataSource=self;
+### (2)Set the delegate of ZWTopSelectVcView（设置代理,可选）
     self.topSelectVcView.delegate=self;
 ### 3.Start drawing the UI （开始绘制UI）
     [self.topSelectVcView setupZWTopSelectVcViewUI];
