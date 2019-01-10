@@ -18,6 +18,7 @@
 @interface ZWTopSelectButton : UIButton
 -(void)setState:(BOOL)state;
 
+@property (nonatomic ,assign) NSInteger index;
 @property (nonatomic ,strong) UILabel *labName;
 @property (nonatomic ,strong) UIView  *viewLine;
 @property (nonatomic ,strong) UIColor *selectedColor;

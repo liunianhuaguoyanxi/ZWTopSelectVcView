@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class ZWTopSelectVcView;
 @class ZWTopSelectButton;
-@protocol ZWTopSelectVcViewDelegate <NSObject>
+@protocol ZWTopSelectVcViewDataSource <NSObject>
 
 @required
 /**
@@ -36,7 +36,9 @@
 -(void)totalTopZWTopSelectButton:(ZWTopSelectButton *)totalTopBtns IntopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
 //
-///顶部标题背景设置
+//顶部滑块背景设置
+-(UIColor *)topSliderViewViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+//顶部标题背景设置
 -(UIColor *)topViewBackGroundColorInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 ///顶部高度设置
 -(CGFloat)topViewHeightInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
@@ -58,11 +60,25 @@
 -(CGFloat)childVcViewYInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
 
 
-///初始化展示第几个控制器（默认第一个）
+//以下两个方法，第一个优先级最高
+///初始化展示第几个控制器（默认第一个，以UIViewController查找，优先级高）
+-(UIViewController *)showChildViewVcNameInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
+///初始化展示第几个控制器（默认第一个,以index查找，优先级低）
 -(NSInteger)showChildViewVcIndexInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView;
+
+
 
 @end
 
+@protocol ZWTopSelectVcViewDelegate <NSObject>
+
+@optional
+
+//返回当前选中Vc以及index(index 最小以1开始)
+- (void)topSelectVcView:(ZWTopSelectVcView *)topSelectVcView didSelectVc:(UIViewController *)selectVc atIndex:(int)index;
+
+@end
 
 @interface ZWTopSelectVcView : UIView
 /**
@@ -71,6 +87,8 @@
 -(void)setupZWTopSelectVcViewUI;
 
 @property (nonatomic, weak) id<ZWTopSelectVcViewDelegate> delegate;
+
+@property (nonatomic, weak) id<ZWTopSelectVcViewDataSource> dataSource;
 
 /*************   顶部button具有的公有属性   *****************
  *

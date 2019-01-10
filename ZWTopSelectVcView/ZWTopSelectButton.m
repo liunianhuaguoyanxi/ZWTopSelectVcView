@@ -46,7 +46,7 @@
 -(float)topSelectBtnHeight
 {
     if ([self.delegata respondsToSelector:@selector(topSelectBtnSpacingBarHeightInZWTopSelectButtonDelegate:)]) {
-       return  [self.delegata topSelectBtnSpacingBarHeightInZWTopSelectButtonDelegate:self];
+        return  [self.delegata topSelectBtnSpacingBarHeightInZWTopSelectButtonDelegate:self];
     }else
     {
         return 30;

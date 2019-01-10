@@ -49,7 +49,7 @@ static const CGFloat originalChildVcViewHeight=50;
 @property (nonatomic, assign) NSInteger                showChildViewVcIndex;
 @end
 typedef enum{
-    ZWTopSelectButtonTypeHeadFirst,
+    ZWTopSelectButtonTypeHeadFirst=0,
     ZWTopSelectButtonTypeHeadSecond,
     ZWTopSelectButtonTypeHeadThird,
     ZWTopSelectButtonTypeHeadFourth,
@@ -74,87 +74,124 @@ typedef enum{
     [self setupChildViewController];
     
     
-
-
+    
+    
 }
-
+- (UIColor *)setupSliderViewBackGourndColor
+{
+    if ([self.dataSource respondsToSelector:@selector(topSliderViewViewBackGroundColorInZWTopSelectVcView:)]) {
+        return  [self.dataSource topSliderViewViewBackGroundColorInZWTopSelectVcView:self];
+    }else{
+        return [UIColor redColor];}
+}
 - (UIColor *)setupTopViewBackGourndColor
 {
-    if ([self.delegate respondsToSelector:@selector(topViewBackGroundColorInZWTopSelectVcView:)]) {
-        return  [self.delegate topViewBackGroundColorInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(topViewBackGroundColorInZWTopSelectVcView:)]) {
+        return  [self.dataSource topViewBackGroundColorInZWTopSelectVcView:self];
     }else{
         return [UIColor whiteColor];}
 }
 -(CGFloat)setupTopViewHeight
 {
-    if ([self.delegate respondsToSelector:@selector(topViewHeightInZWTopSelectVcView:)]) {
-        return  [self.delegate topViewHeightInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(topViewHeightInZWTopSelectVcView:)]) {
+        return  [self.dataSource topViewHeightInZWTopSelectVcView:self];
     }else{
         return originalTopViewHeight;}
 }
 -(CGFloat)setupTopViewWidth
 {
-    if ([self.delegate respondsToSelector:@selector(topViewWidthInZWTopSelectVcView:)]) {
-        return  [self.delegate topViewWidthInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(topViewWidthInZWTopSelectVcView:)]) {
+        return  [self.dataSource topViewWidthInZWTopSelectVcView:self];
     }else{
         return self.frame.size.width;}
 }
 
 -(CGFloat)setupTopViewX
 {
-    if ([self.delegate respondsToSelector:@selector(topViewXInZWTopSelectVcView:)]) {
-        return  [self.delegate topViewXInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(topViewXInZWTopSelectVcView:)]) {
+        return  [self.dataSource topViewXInZWTopSelectVcView:self];
     }else{
         return 0;}
 }
 
 -(CGFloat)setupTopViewY
 {
-    if ([self.delegate respondsToSelector:@selector(topViewYInZWTopSelectVcView:)]) {
-        return  [self.delegate topViewYInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(topViewYInZWTopSelectVcView:)]) {
+        return  [self.dataSource topViewYInZWTopSelectVcView:self];
     }else{
         return 0;}
 }
 
 -(CGFloat)setupChildVcViewHeight
 {
-    if ([self.delegate respondsToSelector:@selector(childVcViewHeightInZWTopSelectVcView:)]) {
-        return  [self.delegate childVcViewHeightInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(childVcViewHeightInZWTopSelectVcView:)]) {
+        return  [self.dataSource childVcViewHeightInZWTopSelectVcView:self];
     }else{
         return self.frame.size.height;}
 }
 -(CGFloat)setupChildVcViewWidth
 {
-    if ([self.delegate respondsToSelector:@selector(childVcViewWidthInZWTopSelectVcView:)]) {
-        return  [self.delegate childVcViewWidthInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(childVcViewWidthInZWTopSelectVcView:)]) {
+        return  [self.dataSource childVcViewWidthInZWTopSelectVcView:self];
     }else{
         return self.frame.size.width;}
 }
 
 -(CGFloat)setupChildVcViewX
 {
-    if ([self.delegate respondsToSelector:@selector(childVcViewXInZWTopSelectVcView:)]) {
-        return  [self.delegate childVcViewXInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(childVcViewXInZWTopSelectVcView:)]) {
+        return  [self.dataSource childVcViewXInZWTopSelectVcView:self];
     }else{
         return 0;}
 }
 
 -(CGFloat)setupChildVcViewY
 {
-    if ([self.delegate respondsToSelector:@selector(childVcViewYInZWTopSelectVcView:)]) {
-        return  [self.delegate childVcViewYInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(childVcViewYInZWTopSelectVcView:)]) {
+        return  [self.dataSource childVcViewYInZWTopSelectVcView:self];
     }else{
         return  originalChildVcViewHeight;}
 }
 -(NSInteger)setupChildViewVcIndex
 {
-    if ([self.delegate respondsToSelector:@selector(showChildViewVcIndexInZWTopSelectVcView:)]) {
-        return [self.delegate showChildViewVcIndexInZWTopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(showChildViewVcIndexInZWTopSelectVcView:)]) {
+        return [self.dataSource showChildViewVcIndexInZWTopSelectVcView:self];
     }else
     {
         return  0;
     }
 }
+
+-(NSInteger)setupChildViewVcIndexWithName
+{
+    if ([self.dataSource respondsToSelector:@selector(showChildViewVcNameInZWTopSelectVcView:)]) {
+        
+        UIViewController *tmpVc = [self.dataSource showChildViewVcNameInZWTopSelectVcView:self];
+        if (tmpVc !=nil) {
+            NSInteger index = -1;
+            for (int i = 0; i<self.contentVC.childViewControllers.count; i++) {
+                UIViewController *vc = self.contentVC.childViewControllers[i];
+                
+                if ([vc isKindOfClass:[tmpVc class]]) {
+                    index = i;
+                    if (vc == tmpVc) {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            return index;
+        }else
+        {
+            return -1;
+        }
+        
+    }else
+    {
+        return  -1;
+    }
+}
+
 -(NSMutableArray *)titleIndexArr
 {
     if (!_titleIndexArr) {
@@ -174,7 +211,7 @@ typedef enum{
  */
 -(void)setupChildViewController
 {
-    NSMutableArray *arr=  [self.delegate totalControllerInZWTopSelectVcView:self];
+    NSMutableArray *arr=  [self.dataSource totalControllerInZWTopSelectVcView:self];
     
     for (UIViewController *vc in arr) {
         [self.contentVC addChildViewController:vc];
@@ -189,8 +226,8 @@ typedef enum{
     self.index=(int)self.contentVC.childViewControllers.count;
     [self setupContentView];
     
-
-
+    
+    
 }
 /**
  *  重新加载数组刷新ZWTopSelectVcView
@@ -202,6 +239,7 @@ typedef enum{
  */
 -(void)reloadWithChildControllerMutableArr:(NSMutableArray *)arr
 {
+    
     if (arr.count>0) {
         [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self setupContentVC];
@@ -221,7 +259,7 @@ typedef enum{
                 [vc removeFromParentViewController];
             }
         }
-
+        
         for (UIViewController *vc in arr) {
             [self.contentVC addChildViewController:vc];
             if (vc.title) {
@@ -235,7 +273,7 @@ typedef enum{
         self.index=(int)self.contentVC.childViewControllers.count;
         [self setupContentView];
     }
-
+    
 }
 /**
  *  顶部选择按钮属性统一设置
@@ -246,8 +284,8 @@ typedef enum{
 {
     btn.labName.text=@"标题";
     btn.labName.font=[UIFont systemFontOfSize:14];
-    if ([self.delegate respondsToSelector:@selector(totalTopZWTopSelectButton:IntopSelectVcView:)]) {
-        [self.delegate totalTopZWTopSelectButton:btn IntopSelectVcView:self];
+    if ([self.dataSource respondsToSelector:@selector(totalTopZWTopSelectButton:IntopSelectVcView:)]) {
+        [self.dataSource totalTopZWTopSelectButton:btn IntopSelectVcView:self];
     }
     
 }
@@ -259,11 +297,11 @@ typedef enum{
 -(void)setupContentVC
 {
     UIViewController *contentVC=[[UIViewController alloc]init];
-  //  contentVC.view.backgroundColor=[UIColor blueColor];
+    //  contentVC.view.backgroundColor=[UIColor blueColor];
     [self addSubview:contentVC.view];
     self.contentVC=contentVC;
     self.contentVC.view.frame=CGRectMake(0, 0,self.frame.size.width, self.frame.size.height);
-
+    
     //self.contentVC.view.backgroundColor=[UIColor redColor];
 }
 -(void)setupContentView
@@ -273,14 +311,14 @@ typedef enum{
     [self setupViewUnderContent];
     [self setupContentViewContent];
 }
--(void)setupViewTopContent 
+-(void)setupViewTopContent
 {
     self.topViewHeight=[self setupTopViewHeight];
     self.topViewWidth = [self setupTopViewWidth];
     self.topViewX=[self setupTopViewX];
     self.topViewY=[self setupTopViewY];
     
-
+    
     
     
     UIView *viewTop=[[UIView alloc]initWithFrame:CGRectMake(_topViewX, _topViewY, _topViewWidth, _topViewHeight)];
@@ -288,8 +326,8 @@ typedef enum{
     [self addSubview:viewTop];
     viewTop.layer.cornerRadius=self.topViewCornerRadius?self.topViewCornerRadius:0;
     self.viewTop=viewTop;
-
-
+    
+    
 }
 -(void)setupEachBtnContent
 {
@@ -303,7 +341,7 @@ typedef enum{
                 case 0:
                 {
                     ZWTopSelectButton *topViewFirstbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake(0,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewFirstbtn.tag=ZWTopSelectButtonTypeHeadFirst;
+                    topViewFirstbtn.index=ZWTopSelectButtonTypeHeadFirst;
                     self.topViewFirstbtn=topViewFirstbtn;
                     [self setupBtnContentState:self.topViewFirstbtn index:i];
                     if (self.contentVC.childViewControllers.count-1==i) {
@@ -314,7 +352,7 @@ typedef enum{
                 case 1:
                 {
                     ZWTopSelectButton *topViewSecondbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewSecondbtn.tag=ZWTopSelectButtonTypeHeadSecond;
+                    topViewSecondbtn.index=ZWTopSelectButtonTypeHeadSecond;
                     self.topViewSecondbtn=topViewSecondbtn;
                     [self setupBtnContentState:self.topViewSecondbtn  index:i];
                 }
@@ -322,16 +360,16 @@ typedef enum{
                 case 2:
                 {
                     ZWTopSelectButton *topViewThirdbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewThirdbtn.tag=ZWTopSelectButtonTypeHeadThird;
+                    topViewThirdbtn.index=ZWTopSelectButtonTypeHeadThird;
                     self.topViewThirdbtn=topViewThirdbtn;
                     [self setupBtnContentState:self.topViewThirdbtn index:i];
-
+                    
                 }
                     break;
                 case 3:
                 {
                     ZWTopSelectButton *topViewFourthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewFourthbtn.tag=ZWTopSelectButtonTypeHeadFourth;
+                    topViewFourthbtn.index=ZWTopSelectButtonTypeHeadFourth;
                     self.topViewFourthbtn=topViewFourthbtn;
                     [self setupBtnContentState:self.topViewFourthbtn index:i];
                 }
@@ -339,7 +377,7 @@ typedef enum{
                 case 4:
                 {
                     ZWTopSelectButton *topViewFifthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewFifthbtn.tag=ZWTopSelectButtonTypeHeadFifth;
+                    topViewFifthbtn.index=ZWTopSelectButtonTypeHeadFifth;
                     self.topViewFifthbtn=topViewFifthbtn;
                     [self setupBtnContentState:self.topViewFifthbtn index:i];
                 }
@@ -347,7 +385,7 @@ typedef enum{
                 case 5:
                 {
                     ZWTopSelectButton *topViewSixthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewSixthbtn.tag=ZWTopSelectButtonTypeHeadSixth;
+                    topViewSixthbtn.index=ZWTopSelectButtonTypeHeadSixth;
                     self.topViewSixthbtn=topViewSixthbtn;
                     [self setupBtnContentState:self.topViewSixthbtn index:i];
                 }
@@ -355,7 +393,7 @@ typedef enum{
                 case 6:
                 {
                     ZWTopSelectButton *topViewSeventhbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewSeventhbtn.tag=ZWTopSelectButtonTypeHeadSeventh;
+                    topViewSeventhbtn.index=ZWTopSelectButtonTypeHeadSeventh;
                     self.topViewSeventhbtn=topViewSeventhbtn;
                     [self setupBtnContentState:self.topViewSeventhbtn index:i];
                 }
@@ -363,7 +401,7 @@ typedef enum{
                 case 7:
                 {
                     ZWTopSelectButton *topViewEighthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-                    topViewEighthbtn.tag=ZWTopSelectButtonTypeHeadEighth;
+                    topViewEighthbtn.index=ZWTopSelectButtonTypeHeadEighth;
                     self.topViewEighthbtn=topViewEighthbtn;
                     [self setupBtnContentState:self.topViewEighthbtn index:i];
                 }
@@ -371,8 +409,8 @@ typedef enum{
                 case 8:
                 {
                     ZWTopSelectButton *topViewNinthbtn=[[ZWTopSelectButton alloc]initWithFrame:CGRectMake((_topViewWidth)/self.contentVC.childViewControllers.count*i,0, (_topViewWidth)/self.contentVC.childViewControllers.count, _topViewHeight)];
-
-                    topViewNinthbtn.tag=ZWTopSelectButtonTypeHeadNinth;
+                    
+                    topViewNinthbtn.index=ZWTopSelectButtonTypeHeadNinth;
                     self.topViewNinthbtn=topViewNinthbtn;
                     [self setupBtnContentState:self.topViewNinthbtn index:i];
                 }
@@ -384,12 +422,12 @@ typedef enum{
 }
 -(void)setupViewUnderContent
 {
-
-
+    
+    
     self.viewUnder=[[UIView alloc]initWithFrame:CGRectMake(0, (_topViewHeight)-2, (_topViewWidth)/self.contentVC.childViewControllers.count, 2)];
-    self.viewUnder.backgroundColor=[UIColor redColor];
+    self.viewUnder.backgroundColor=[self setupSliderViewBackGourndColor];
     [self.viewTop addSubview:_viewUnder];
-      //  NSLog(@"%f -------",underViewInitHeight);
+    //  NSLog(@"%f -------",underViewInitHeight);
 }
 
 -(void)setupContentViewContent
@@ -399,37 +437,51 @@ typedef enum{
     self.childVcViewWidth= [self setupChildVcViewWidth];
     self.childVcViewX=[self setupChildVcViewX];
     self.childVcViewY=[self setupChildVcViewY];
-    self.showChildViewVcIndex=[self setupChildViewVcIndex]-1;
-    
-    if ([self setupChildViewVcIndex]) {
-        [self setupSelcetedShowViewControllerWithIndex:self.showChildViewVcIndex];
+    self.showChildViewVcIndex=[self setupChildViewVcIndexWithName];
+    if (self.showChildViewVcIndex==-1) {
+        self.showChildViewVcIndex = [self setupChildViewVcIndex];
     }
-
-
-     UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(self.childVcViewX,self.childVcViewY, self.childVcViewWidth,_childVcViewHeight)];
+    if (self.showChildViewVcIndex) {
+        [self setupSelcetedShowViewControllerWithIndex:self.showChildViewVcIndex];
+        
+    }
+    
+    
+    UIView *animationChangeView=[[UIView alloc]initWithFrame:CGRectMake(self.childVcViewX,self.childVcViewY, self.childVcViewWidth,_childVcViewHeight)];
     [self.contentVC.view addSubview:animationChangeView];
     self.animationChangeView =animationChangeView;
-  //  animationChangeView.backgroundColor=[UIColor redColor];
+    //  animationChangeView.backgroundColor=[UIColor redColor];
     
-
+    
     
     if (self.contentVC.childViewControllers.count==0||self.contentVC.childViewControllers.count>9) {
         [self removeFromSuperview];
         
     }else
     {
-        self.showVC=self.contentVC.childViewControllers[0];
-        self.contentVC.childViewControllers[0].view.frame=self.animationChangeView.bounds;
+        if (self.btnIndex>self.contentVC.childViewControllers.count) {
+            return;
+        }
+        self.showVC=self.contentVC.childViewControllers[self.btnIndex];
+        self.contentVC.childViewControllers[self.btnIndex].view.frame=self.animationChangeView.bounds;
         self.showVC.view.frame=self.animationChangeView.bounds;
         //self.showVC.view.backgroundColor=[UIColor clearColor];
         [self.animationChangeView addSubview:self.showVC.view];
-        if (self.showVC.title) {
-            self.topViewFirstbtn.labName.text=self.showVC.title;
+        
+        if (self.btnIndex == 0) {
+            if (self.showVC.title) {
+                self.topViewFirstbtn.labName.text=self.showVC.title;
+            }
+            [self.topViewFirstbtn setState:YES];
         }
-        [self.topViewFirstbtn setState:YES];
+        
         
         [self setupShowVcRecognizer];
-               // NSLog(@"%d --init",self.btnIndex);
+        
+        if ([self.delegate respondsToSelector:@selector(topSelectVcView:didSelectVc:atIndex:)]) {
+            [self.delegate topSelectVcView:self didSelectVc:self.showVC atIndex:self.btnIndex];
+        }
+        // NSLog(@"%d --init",self.btnIndex);
     }
 }
 -(void)setupBtnContentState:(ZWTopSelectButton *)btn index:(int)index
@@ -448,7 +500,7 @@ typedef enum{
         }
         
     }
-    [self setupBtnState]; 
+    [self setupBtnState];
     [btn addTarget:self action:@selector(btnHeadClickType:) forControlEvents:UIControlEventTouchUpInside];
     if (self.contentVC.childViewControllers.count-1==index) {
         btn.viewLine.hidden=YES;
@@ -462,9 +514,9 @@ typedef enum{
         }];
     }else
     {
-            self.viewUnder.frame=CGRectMake(index *((_topViewWidth)/self.index), (_topViewHeight)-2, (_topViewWidth)/self.index, 2);
+        self.viewUnder.frame=CGRectMake(index *((_topViewWidth)/self.index), (_topViewHeight)-2, (_topViewWidth)/self.index, 2);
     }
-
+    
 }
 
 -(void)setupbtnSelectIndex:(int)btnSelectIndex withAnimation:(BOOL)isAnimation
@@ -535,48 +587,63 @@ typedef enum{
             break;
             
     }
-
+    
 }
 -(void)btnHeadClickType:(ZWTopSelectButton *)btn
 {
-
-    self.btnIndex=(int)btn.tag;
+    self.btnIndex=(int)btn.index;
     [self.showVC.view removeFromSuperview];
     self.newindex=[btn.superview.subviews indexOfObject:btn];
     self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
     
     self.showVC=self.contentVC.childViewControllers[self.newindex];
-           // self.showVC.view.backgroundColor=[UIColor redColor];
     self.showVC.view.frame=self.animationChangeView.bounds;
     [self.animationChangeView addSubview:self.showVC.view];
     [self setupShowVcRecognizer];
-
     
-
-
-              //  NSLog(@"%d --init222",self.btnIndex);
+    
+    
+    
+    //  NSLog(@"%d --init222",self.btnIndex);
     
     
     [self setupActionState:self.isCloseAnimation];
     
-    [self setupbtnSelectIndex:(int)btn.tag withAnimation:YES];
+    [self setupbtnSelectIndex:(int)btn.index withAnimation:YES];
+    
+    if ([self.delegate respondsToSelector:@selector(topSelectVcView:didSelectVc:atIndex:)]) {
+        [self.delegate topSelectVcView:self didSelectVc:self.showVC atIndex:self.btnIndex];
+    }
 }
 -(void)setupSelcetedShowViewControllerWithIndex:(NSInteger)index
 {
-    if (index>=0&&index<self.contentVC.childViewControllers.count) {
-        for (ZWTopSelectButton *selectBtn in self.viewTop.subviews) {
-            if (selectBtn.tag==index) {
-                [self setupSelcetedShowClickTypes:selectBtn];
-                
+    
+    if (index>=0) {
+        if (index>=self.contentVC.childViewControllers.count) {
+            index = self.contentVC.childViewControllers.count -1;
+            if (index < 0) {
+                index = 0;
             }
         }
+        
+        for (ZWTopSelectButton *selectBtn in self.viewTop.subviews) {
+            if ([selectBtn isKindOfClass:[ZWTopSelectButton class]]) {
+                if (selectBtn.index==index) {
+                    [self setupSelcetedShowClickTypes:selectBtn];
+                    
+                }
+            }
+            
+        }
+    }else
+    {
+        
     }
-
 }
 -(void)setupSelcetedShowClickTypes:(ZWTopSelectButton *)btn
 {
     
-    self.btnIndex=(int)btn.tag;
+    self.btnIndex=(int)btn.index;
     [self.showVC.view removeFromSuperview];
     self.newindex=[btn.superview.subviews indexOfObject:btn];
     self.oldindex=[self.contentVC.childViewControllers indexOfObject:self.showVC];
@@ -589,13 +656,17 @@ typedef enum{
     
     
     
-    [self setupbtnSelectIndex:(int)btn.tag withAnimation:NO];
+    [self setupbtnSelectIndex:(int)btn.index withAnimation:NO];
+    
+    if ([self.delegate respondsToSelector:@selector(topSelectVcView:didSelectVc:atIndex:)]) {
+        [self.delegate topSelectVcView:self didSelectVc:self.showVC atIndex:self.btnIndex];
+    }
 }
 //手势初始化
 -(void)setupShowVcRecognizer
 {
     if (self.isCloseSwipeGesture) {
-
+        
     }else{
         self.recognizerLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
         
@@ -642,6 +713,9 @@ typedef enum{
             [self setupbtnSelectIndex:self.btnIndex withAnimation:YES];
             [self setupActionState:self.isCloseAnimation];
             // NSLog(@"%d --left",self.btnIndex);
+            if ([self.delegate respondsToSelector:@selector(topSelectVcView:didSelectVc:atIndex:)]) {
+                [self.delegate topSelectVcView:self didSelectVc:self.showVC atIndex:self.btnIndex];
+            }
         }
     }
     
@@ -671,6 +745,9 @@ typedef enum{
             [self setupbtnSelectIndex:self.btnIndex withAnimation:YES];
             [self setupActionState:self.isCloseAnimation];
             //  NSLog(@"%d --rigth",self.btnIndex);
+            if ([self.delegate respondsToSelector:@selector(topSelectVcView:didSelectVc:atIndex:)]) {
+                [self.delegate topSelectVcView:self didSelectVc:self.showVC atIndex:self.btnIndex];
+            }
         }
     }
     
@@ -695,11 +772,11 @@ typedef enum{
         [self.animationChangeView.layer removeAllAnimations];
     }else if(state==NO)
     {
-
+        
         if (!self.animationType) {
             self.animationType=Push;
         }
-
+        
         switch (self.animationType) {
             case Fade:
                 [self transitionWithType:kCATransitionFade  ForView:self.animationChangeView];
@@ -762,11 +839,11 @@ typedef enum{
                 
             case FlipFromRight:
                 [self animationWithView:self.animationChangeView WithAnimationTransition:UIViewAnimationTransitionFlipFromRight];
-
+                
             default:
                 break;
         }
-
+        
     }
 }
 - (void) animationWithView : (UIView *)view WithAnimationTransition : (UIViewAnimationTransition) transition
@@ -794,7 +871,7 @@ typedef enum{
     
     //设置运动速度
     animation.timingFunction = UIViewAnimationOptionCurveEaseInOut;
-
+    
     
     [view.layer addAnimation:animation forKey:@"animation"];
 }

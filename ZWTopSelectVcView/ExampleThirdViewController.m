@@ -23,7 +23,7 @@
 
 
 
-@interface ExampleThirdViewController ()<ZWTopSelectVcViewDelegate>
+@interface ExampleThirdViewController ()<ZWTopSelectVcViewDataSource,ZWTopSelectVcViewDelegate>
 @property (nonatomic, weak) ZWTopSelectVcView *topSelectVcView1;
 @property (nonatomic, weak) ZWTopSelectVcView *topSelectVcView2;
 @end
@@ -32,15 +32,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
-// 第一个ZWTopSelectVcView
+    
+    // 第一个ZWTopSelectVcView
     ZWTopSelectVcView *topSelectVcView1=[[ZWTopSelectVcView alloc]init];
     
     topSelectVcView1.frame=CGRectMake(0, 0, self.view.frame.size.width/2, self.view.frame.size.height);
     [self.view addSubview:topSelectVcView1];
     self.topSelectVcView1=topSelectVcView1;
     
+    self.topSelectVcView1.dataSource=self;
     self.topSelectVcView1.delegate=self;
     
     [self.topSelectVcView1 setupZWTopSelectVcViewUI];
@@ -49,15 +50,16 @@
     
     self.topSelectVcView1.topViewFirstbtn.labName.text=@"1.设置方法";
     self.topSelectVcView1.topViewSecondbtn.labName.text=@"2.框架优点";
-
     
-// 第二个ZWTopSelectVcView
+    
+    // 第二个ZWTopSelectVcView
     ZWTopSelectVcView *topSelectVcView2=[[ZWTopSelectVcView alloc]init];
-
+    
     topSelectVcView2.frame=CGRectMake(self.view.frame.size.width/2+10, 0, self.view.frame.size.width/2-10, self.view.frame.size.height);
     [self.view addSubview:topSelectVcView2];
     self.topSelectVcView2=topSelectVcView2;
     
+    self.topSelectVcView2.dataSource=self;
     self.topSelectVcView2.delegate=self;
     
     [self.topSelectVcView2 setupZWTopSelectVcViewUI];
@@ -72,7 +74,12 @@
 
 
 #pragma mark - ZWTopSelectVcViewDelegate
+- (void)topSelectVcView:(ZWTopSelectVcView *)topSelectVcView didSelectVc:(UIViewController *)selectVc atIndex:(int)index
+{
+    NSLog(@"\n当前选中Vc %@ \n index为%d",selectVc,index);
+}
 
+#pragma mark - ZWTopSelectVcViewDataSource
 //初始化设置
 -(NSMutableArray *)totalControllerInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 {
@@ -84,24 +91,24 @@
         [controllerMutableArr addObject:[[FirstTwoViewController alloc]init]];
         
         return controllerMutableArr;
-
+        
     }
     
-     if(topSelectVcView==self.topSelectVcView2)
+    if(topSelectVcView==self.topSelectVcView2)
     {      NSMutableArray *controllerMutableArr=[NSMutableArray array];
-    
-    [controllerMutableArr addObject:[[SecondOneTableViewController alloc]init]];
-    [controllerMutableArr addObject:[[SecondTwoTableViewController alloc]init]];
-    [controllerMutableArr addObject:[[SecondThreeViewController alloc]init] ];
+        
+        [controllerMutableArr addObject:[[SecondOneTableViewController alloc]init]];
+        [controllerMutableArr addObject:[[SecondTwoTableViewController alloc]init]];
+        [controllerMutableArr addObject:[[SecondThreeViewController alloc]init] ];
         
         
-    return controllerMutableArr;
+        return controllerMutableArr;
     }
-     else
+    else
     {
         return nil;
     }
-
+    
 }
 
 
