@@ -202,11 +202,11 @@
 }
 
 //（可选）初始化展示第几个控制器（默认第一个，以UIViewController查找，优先级高）
-//-(UIViewController *)showChildViewVcNameInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
-//{
-//
-//    return selectViewController;
-//}
+-(UIViewController *)showChildViewVcNameInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
+{
+
+    return selectViewController;
+}
 ///初始化展示第几个控制器（默认第一个 index == 0,以index查找，优先级低）
 //-(NSInteger)showChildViewVcIndexInZWTopSelectVcView:(ZWTopSelectVcView *)topSelectVcView
 //{
